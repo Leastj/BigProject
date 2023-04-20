@@ -1,5 +1,5 @@
-const express = require('express');
-const mongoose = require('mongoose');
+import express from 'express';
+import mongoose from 'mongoose';
 
 
 // Connexion au serveur 
@@ -11,12 +11,15 @@ main().catch(err => console.log(err));
 
 
 // code de connexion à Mongoose 
-// remplacer mongodb://127.0.0.1:27017/test par l'URL de connexion.
+// remplacer mongodb://127.0.0.1:27017/bigProjectBD par l'URL de connexion.
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1/test', { useNewUrlParser: true, useUnifiedTopology: true });
+  await mongoose.connect('mongodb://127.0.0.1/bigProjectBD', { useNewUrlParser: true, useUnifiedTopology: true });
   console.log('Connexion à la base de données réussie'); // Affichage d'un message dans la console si la connexion à la base de données est réussie
 }
 
 app.listen(port, hostname, () => {
   console.log(`Serveur démarré sur http://${hostname}:${port}/`); // Affichage d'un message dans la console lorsque le serveur Express démarre
 });
+
+import userdef from "./models/users.js";
+console.log(userdef)

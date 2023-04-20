@@ -1,4 +1,4 @@
-const mongoose = require ('mongoose');
+import mongoose from "mongoose";
 
 const roundSchema = new mongoose.Schema({
     id:{
@@ -11,4 +11,5 @@ const roundSchema = new mongoose.Schema({
     }
 
 });
-module.exports = mongoose.model('Round', roundSchema);
+
+export default mongoose.model('Round', roundSchema);
