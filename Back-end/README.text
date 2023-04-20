@@ -1,0 +1,41 @@
+DÉFINITION DES ENDPOINTS
+
+**USERS :**
+
+- GET /users : Récupère une liste de tous les utilisateurs
+- GET /users/{id} : Récupère les détails de l'utilisateur avec l'ID
+- PUT /users/{id} : Met à jour les détails de l'utilisateur avec l'ID
+- DELETE /users/{id} : Supprime l'utilisateur avec l'ID spécifié
+- 
+
+**EVENTS :**
+
+- GET /events : Récupère une liste de tous les événements
+- GET /events/{id} : Récupère les détails de l'événement avec l'ID
+- POST /events : Crée un nouvel événement
+- PUT /events/{id} : Met à jour les détails de l'événement avec l'ID
+- DELETE /events/{id} : Supprime l'événement avec l'ID
+- POST /events/{id}/cancel : Annule l'événement avec l'ID
+- POST /events/{id}/send-invitation : Envoie une invitation pour l'événement avec l'ID
+- POST /events/{id}/finish : Marque l'événement avec l'ID comme terminé
+
+**ROUNDS :**
+
+- GET /rounds : Récupère une liste de tous les tours
+- GET /rounds/{id} : Récupère les détails du tour avec l'ID
+- POST /rounds : Crée un nouveau tour
+- PUT /rounds/{id} : Met à jour les détails du tour avec l'ID
+- DELETE /rounds/{id} : Supprime le tour avec l'ID 
+- GET /rounds/ongoing : Récupère une liste des tours en cours
+- GET /rounds/finished : Récupère une liste des tours terminés
+
+**MATCHES :**
+
+- GET /matches : Récupère une liste de tous les matches
+- GET /matches/{id} : Récupère les détails du match avec l'ID 
+- POST /matches : Crée un nouveau match
+- PUT /matches/{id} : Met à jour les détails du match avec l'ID 
+- DELETE /matches/{id} : Supprime le match avec l'ID 
+- GET /matches/ongoing : Récupère une liste des matches en cours
+- POST /matches/{id}/cancel : Annule le match avec l'ID 
+- POST /matches/{id}/finish : Marque le match avec l'ID comme terminé
