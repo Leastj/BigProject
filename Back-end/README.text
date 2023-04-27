@@ -1,7 +1,7 @@
 DÉFINITION DES ENDPOINTS
 
 **USERS :**
-
+- POST /users : Créer un utilisateur 
 - GET /users : Récupère une liste de tous les utilisateurs
 - GET /users/{id} : Récupère les détails de l'utilisateur avec l'ID
 - PUT /users/{id} : Met à jour les détails de l'utilisateur avec l'ID
