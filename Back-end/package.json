@@ -1,4 +1,10 @@
 {
+  "name":"backend_bigproject",
+  "vesion":"0.0.1",
+  "main":"index.js",
+  "scripts": {
+    "start": "node index.js" 
+  },
   "type": "module",
   "dependencies": {
     "express": "^4.18.2",
