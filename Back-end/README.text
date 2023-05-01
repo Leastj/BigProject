@@ -30,8 +30,10 @@ DÉFINITION DES ENDPOINTS
 - GET /rounds/{id} : Récupère les détails du tour avec l'ID
 - POST /rounds : Crée un nouveau tour
 - PUT /rounds/{id} : Met à jour les détails du tour avec l'ID
-- DELETE /rounds/{id} : Supprime le tour avec l'ID 
 - GET /rounds/ongoing : Récupère une liste des tours en cours
+- GET /rounds/finished : Récupère une liste des tours terminés
+- POST / Rounds/{id}finish : Marque le tour comme terminé
+- DELETE /rounds/{id}cancel : Annule le tour avec l'ID 
 - GET /rounds/finished : Récupère une liste des tours terminés
 
 **MATCHES :**

@@ -1,6 +1,11 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import usersRoutes from './routes/users.js';
+import eventsRoutes from './routes/events.js';
+import matchesRoutes from './routes/matches.js';
+import roundsRoutes from './routes/rounds.js';
+
+
 // Connexion au serveur 
 const app = express(); // Création d'une instance de l'application Express
 const hostname = 'localhost';
@@ -31,3 +36,6 @@ app.use(express.json())
 
 
 app.use("/users", usersRoutes)
+app.use("/events", eventsRoutes)
+app.use("/matches", matchesRoutes)
+app.use("/round", roundsRoutes)
