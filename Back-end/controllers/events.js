@@ -84,6 +84,7 @@ export const cancelEvent = async (req, res) => {
           }
 
           // CODE POUR ENVOYER L'INVITATION
+          
           res.status(200).json({ message: 'Invitation sent successfully' });
         } catch (error) {
           res.status(500).json({ error: error.message });
