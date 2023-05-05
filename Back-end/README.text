@@ -5,6 +5,12 @@ DÉMARRER LE PROJECT : npm start (connexion à la base de donnée)
 
 DÉFINITION DES ENDPOINTS
 
+**AUTHENTIFICATION :**
+- POST /signup : s'inscrire
+- POST /login : se connecter
+- POST /logout : se déconnecter
+
+
 **USERS :**
 - POST /users : Créer un utilisateur 
 - GET /users : Récupère une liste de tous les utilisateurs
