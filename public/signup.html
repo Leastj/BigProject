@@ -144,11 +144,9 @@
                   class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none transition focus:border-primary focus-visible:shadow-none"
                   required />
               </div>
-              <button onclick="submit(event)" type="submit"
-                class="bg-primary text-white font-semibold py-3 px-8 rounded-md shadow-md hover:bg-primary-dark transition duration-300">Créer
-                mon compte</button>
-
-            </div>
+              <button onclick="submit()" type="submit" class="bg-primary text-white font-semibold py-3 px-8 rounded-md shadow-md hover:bg-primary-dark transition duration-300">
+                Créer mon compte
+              </button>
 
 
 
@@ -486,25 +484,32 @@
 
   <!-- ====== All Scripts -->
   <script src="assets/js/main.js"></script>
-  <script>
-    async function submit() {
 
-      let response = await fetch('/auth/signup', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          pseudo: document.getElementById("pseudo").value,
-          mail: document.getElementById("mail").value,
-          password: document.getElementById("password").value,
-        })
-      })
-      document.body.append()
-      // Faire un fichier fonction app.call pour pouvoir la rappeler là Api.call('/auth/signup',"POST", )
-      // si j'ai  utilisateur avec mm coordonné alors erreur et si libre alors  redirection vers page profil.
-    }
+  <script type="module">
+    
+    import * as api from './services/api.js';
+
+async function submit() {
+  try {
+    const response = await api.call('/auth/signup', 'POST', {
+      pseudo: document.getElementById('pseudo').value,
+      mail: document.getElementById('mail').value,
+      password: document.getElementById('password').value,
+    });
+
+    window.location.href = './public/profil.html';
+  } catch (error) {
+    console.error(error);
+
+    const errorMessage = document.createElement('p');
+    errorMessage.textContent = 'Une erreur s\'est produite lors de la création du compte. Veuillez réessayer plus tard.';
+    errorMessage.style.color = 'red';
+    document.body.appendChild(errorMessage);
+  }
+}
   </script>
+
+
 </body>
 
 </html>
