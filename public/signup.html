@@ -505,12 +505,22 @@
             password: document.getElementById('password').value,
           });
 
-          window.location.href = './profil.html';
+          const myHeaders = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'your-token'
+          });
+          // console.log(response.id, response.token)
+
+          if (response.id != null && response.token != null) {
+            window.location.replace("http://localhost:3000/profil.html")
+          }
+
+
         } catch (error) {
           console.error(error);
 
           const errorMessageContainer = document.getElementById('ErrorMessage');
-          errorMessageContainer.innerHTML = ''; 
+          errorMessageContainer.innerHTML = '';
 
           const errorMessage = document.createElement('p');
           errorMessage.textContent = "Oups, votre pseudo ou mail existe déjà.";

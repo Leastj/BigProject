@@ -22,8 +22,9 @@ export const signupUser = async (req, res) => {
     const token = await generateToken(user);
 
     // Renvoyez le token dans la réponse
+    
 
-    res.status(201).json({ token });
+    res.status(201).json({ id:user._id,token:token });
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: "Une erreur s'est produite lors de la création de l'utilisateur" });
@@ -54,7 +55,9 @@ export const loginUser = async (req, res) => {
 
     // Redirection vers la page profil.html avec le token et l'identifiant
 
-return res.send({url:`/public/profil.html?id=${user._id}&token=${token}`})
+    return res.send({id: user._id, token:token})
+
+/* return res.send({url:`./public/profil.html?id=${user._id}&token=${token}`}) */
 
     /* return res.redirect(`/public/profil.html?id=${user._id}&token=${token}`); */
 

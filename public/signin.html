@@ -1,223 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Se connecter | Tourney Genious</title>
-    <link
-      rel="shortcut icon"
-      href="assets/images/favicon.png"
-      type="image/x-icon"
-    />
-    <link rel="stylesheet" href="assets/css/animate.css" />
-    <link rel="stylesheet" href="assets/css/tailwind.css" />
 
-    <!-- ==== WOW JS ==== -->
-    <script src="assets/js/wow.min.js"></script>
-    <script>
-      new WOW().init();
-    </script>
-  </head>
-  <body>
-    <div class="ud-header absolute top-0 left-0 z-40 flex w-full items-center bg-transparent">
-      <div class="container">
-        <div class="relative -mx-4 flex items-center justify-between">
-          <div class="w-60 max-w-full px-4">
-            <a href="index.html" class="navbar-logo block w-full py-5">
-              <img src="assets/images/logo/logo-white.svg" alt="logo" class="header-logo w-full" />
-            </a>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Se connecter | Tourney Genious</title>
+  <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon" />
+  <link rel="stylesheet" href="assets/css/animate.css" />
+  <link rel="stylesheet" href="assets/css/tailwind.css" />
+
+  <!-- ==== WOW JS ==== -->
+  <script src="assets/js/wow.min.js"></script>
+  <script>
+    new WOW().init();
+  </script>
+</head>
+
+<body>
+  <div class="ud-header absolute top-0 left-0 z-40 flex w-full items-center bg-transparent">
+    <div class="container">
+      <div class="relative -mx-4 flex items-center justify-between">
+        <div class="w-60 max-w-full px-4">
+          <a href="index.html" class="navbar-logo block w-full py-5">
+            <img src="assets/images/logo/logo-white.svg" alt="logo" class="header-logo w-full" />
+          </a>
+        </div>
+        <div class="flex w-full items-center justify-between px-4">
+          <div>
+            <button id="navbarToggler"
+              class="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden">
+              <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
+              <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
+              <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
+            </button>
+            <nav id="navbarCollapse"
+              class="absolute right-4 top-full hidden w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:py-0 lg:px-4 lg:shadow-none xl:px-6">
+              <ul class="blcok lg:flex">
+                <li class="group relative">
+                  <a href="#Accueil"
+                    class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">
+                    Accueil
+                  </a>
+                </li>
+                <li class="group relative">
+                  <a href="#À propos"
+                    class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:ml-7 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-12">
+                    À propos
+                  </a>
+                </li>
+
+                <li class="group relative">
+                  <a href="#contact"
+                    class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:ml-7 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-12">
+                    Contact
+                  </a>
+                </li>
+
           </div>
-          <div class="flex w-full items-center justify-between px-4">
-            <div>
-              <button id="navbarToggler"
-                class="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden">
-                <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
-                <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
-                <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
-              </button>
-              <nav id="navbarCollapse"
-                class="absolute right-4 top-full hidden w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:py-0 lg:px-4 lg:shadow-none xl:px-6">
-                <ul class="blcok lg:flex">
-                  <li class="group relative">
-                    <a href="#Accueil"
-                      class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">
-                      Accueil
-                    </a>
-                  </li>
-                  <li class="group relative">
-                    <a href="#À propos"
-                      class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:ml-7 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-12">
-                      À propos
-                    </a>
-                  </li>
-  
-                  <li class="group relative">
-                    <a href="#contact"
-                      class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:ml-7 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-12">
-                      Contact
-                    </a>
-                  </li>
-  
-            </div>
-            </li>
-            </ul>
-            </nav>
-          </div>
-          <div style="display: inline-flex; justify-content: center; align-items: center;">
-            <a href="signin.html" class="rounded-lg bg-opacity-100 py-4 px-4 text-base font-medium text-white duration-300 hover:bg-opacity-100 hover:text-white hover:bg-931433" style="min-width: 120px; height: 40px; border:0px solid white; border-radius: 32px; flex: none; order: 2; flex-grow: 0; display: flex; align-items: center; justify-content: center;">
-                Se connecter
-            </a>
-            <a href="signup.html" class="rounded-lg bg-white py-4 px-4 text-base font-medium text-dark duration-300 hover:bg-opacity-100 hover:text-dark hover:bg-931433" style="min-width: 120px; height: 40px; background: #ECECEC; border-radius: 32px; flex: none; order: 3; flex-grow: 0; display: flex; align-items: center; justify-content: center;">
-                S'inscrire
-            </a>
+          </li>
+          </ul>
+          </nav>
+        </div>
+        <div style="display: inline-flex; justify-content: center; align-items: center;">
+          <a href="signin.html"
+            class="rounded-lg bg-opacity-100 py-4 px-4 text-base font-medium text-white duration-300 hover:bg-opacity-100 hover:text-white hover:bg-931433"
+            style="min-width: 120px; height: 40px; border:0px solid white; border-radius: 32px; flex: none; order: 2; flex-grow: 0; display: flex; align-items: center; justify-content: center;">
+            Se connecter
+          </a>
+          <a href="signup.html"
+            class="rounded-lg bg-white py-4 px-4 text-base font-medium text-dark duration-300 hover:bg-opacity-100 hover:text-dark hover:bg-931433"
+            style="min-width: 120px; height: 40px; background: #ECECEC; border-radius: 32px; flex: none; order: 3; flex-grow: 0; display: flex; align-items: center; justify-content: center;">
+            S'inscrire
+          </a>
         </div>
       </div>
     </div>
-    </div>
-    <!-- ====== Navbar Section End -->
+  </div>
+  <!-- ====== Navbar Section End -->
 
-    <!-- ====== Banner Section Start -->
-    <div
-      class="relative z-10 overflow-hidden bg-primary pt-[120px] pb-[100px] md:pt-[130px] lg:pt-[160px]"
-    >
-      <div class="container">
-        <div class="-mx-4 flex flex-wrap items-center">
-          <div class="w-full px-4">
-            <div class="text-center">
-              <h1 class="text-4xl font-semibold text-white">Connecte toi pour participer à des tournois !</h1>
-            </div>
+  <!-- ====== Banner Section Start -->
+  <div class="relative z-10 overflow-hidden bg-primary pt-[120px] pb-[100px] md:pt-[130px] lg:pt-[160px]">
+    <div class="container">
+      <div class="-mx-4 flex flex-wrap items-center">
+        <div class="w-full px-4">
+          <div class="text-center">
+            <h1 class="text-4xl font-semibold text-white">Connecte toi pour participer à des tournois !</h1>
           </div>
         </div>
       </div>
-      <div>
-        <span class="absolute top-0 left-0 z-[-1]">
-          <svg
-            width="495"
-            height="470"
-            viewBox="0 0 495 470"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle
-              cx="55"
-              cy="442"
-              r="138"
-              stroke="white"
-              stroke-opacity="0.04"
-              stroke-width="50"
-            />
-            <circle
-              cx="446"
-              r="39"
-              stroke="white"
-              stroke-opacity="0.04"
-              stroke-width="20"
-            />
-            <path
-              d="M245.406 137.609L233.985 94.9852L276.609 106.406L245.406 137.609Z"
-              stroke="white"
-              stroke-opacity="0.08"
-              stroke-width="12"
-            />
-          </svg>
-        </span>
-        <span class="absolute top-0 right-0 z-[-1]">
-          <svg
-            width="493"
-            height="470"
-            viewBox="0 0 493 470"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle
-              cx="462"
-              cy="5"
-              r="138"
-              stroke="white"
-              stroke-opacity="0.04"
-              stroke-width="50"
-            />
-            <circle
-              cx="49"
-              cy="470"
-              r="39"
-              stroke="white"
-              stroke-opacity="0.04"
-              stroke-width="20"
-            />
-            <path
-              d="M222.393 226.701L272.808 213.192L259.299 263.607L222.393 226.701Z"
-              stroke="white"
-              stroke-opacity="0.06"
-              stroke-width="13"
-            />
-          </svg>
-        </span>
-      </div>
     </div>
-    <!-- ====== Banner Section End -->
+    <div>
+      <span class="absolute top-0 left-0 z-[-1]">
+        <svg width="495" height="470" viewBox="0 0 495 470" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="55" cy="442" r="138" stroke="white" stroke-opacity="0.04" stroke-width="50" />
+          <circle cx="446" r="39" stroke="white" stroke-opacity="0.04" stroke-width="20" />
+          <path d="M245.406 137.609L233.985 94.9852L276.609 106.406L245.406 137.609Z" stroke="white"
+            stroke-opacity="0.08" stroke-width="12" />
+        </svg>
+      </span>
+      <span class="absolute top-0 right-0 z-[-1]">
+        <svg width="493" height="470" viewBox="0 0 493 470" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="462" cy="5" r="138" stroke="white" stroke-opacity="0.04" stroke-width="50" />
+          <circle cx="49" cy="470" r="39" stroke="white" stroke-opacity="0.04" stroke-width="20" />
+          <path d="M222.393 226.701L272.808 213.192L259.299 263.607L222.393 226.701Z" stroke="white"
+            stroke-opacity="0.06" stroke-width="13" />
+        </svg>
+      </span>
+    </div>
+  </div>
+  <!-- ====== Banner Section End -->
 
-    <!-- ====== Forms Section Start -->
-    <section class="bg-[#F4F7FF] py-14 lg:py-20">
-      <div class="container">
-        <div class="-mx-4 flex flex-wrap">
-          <div class="w-full px-4">
-            <div
-              class="wow fadeInUp relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white py-14 px-8 text-center sm:px-12 md:px-[60px]"
-              data-wow-delay=".15s"
-            >
-              <div class="mb-10 text-center">
-                <a
-                  href="javascript:void(0)"
-                  class="mx-auto inline-block max-w-[160px]"
-                >
-                  <img src="assets/images/logo/icon_red.svg" alt="icon" />
-                </a>
-              </div>
-              <div id="ErrorMessage"></div>
-                <div class="mb-6">
-                  <input
-                  id = "mail"
-                    type="email"
-                    placeholder="Email"
-                    class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none transition focus:border-primary focus-visible:shadow-none"
-                  />
-                </div>
-                <div class="mb-6">
-                  <input
-                  id = "password"
-                    type="password"
-                    placeholder="Mot de passe"
-                    class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none transition focus:border-primary focus-visible:shadow-none"
-                  />
-                </div>
-                <div class="mb-10">
-                  <button id="loginUsers" type="submit"
+  <!-- ====== Forms Section Start -->
+  <section class="bg-[#F4F7FF] py-14 lg:py-20">
+    <div class="container">
+      <div class="-mx-4 flex flex-wrap">
+        <div class="w-full px-4">
+          <div
+            class="wow fadeInUp relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white py-14 px-8 text-center sm:px-12 md:px-[60px]"
+            data-wow-delay=".15s">
+            <div class="mb-10 text-center">
+              <a href="javascript:void(0)" class="mx-auto inline-block max-w-[160px]">
+                <img src="assets/images/logo/icon_red.svg" alt="icon" />
+              </a>
+            </div>
+            <div id="ErrorMessage"></div>
+            <div class="mb-6">
+              <input id="mail" type="email" placeholder="Email"
+                class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none transition focus:border-primary focus-visible:shadow-none" />
+            </div>
+            <div class="mb-6">
+              <input id="password" type="password" placeholder="Mot de passe"
+                class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none transition focus:border-primary focus-visible:shadow-none" />
+            </div>
+            <div class="mb-10">
+              <button id="loginUsers" type="submit"
                 class="bg-primary text-white font-semibold py-3 px-8 rounded-md shadow-md hover:bg-primary-dark transition duration-300">
                 Se connecter
               </button>
-                </div>
-              <a
-                href="javascript:void(0)"
-                class="mb-2 inline-block text-base text-[#adadad] hover:text-primary"
-              >
-                Vous avez oublié votre mot de passe ?
-              </a>
-              <p class="text-base text-[#adadad]">
-                Pas encore inscrit ?
-                <a href="signup.html" class="text-primary hover:underline">
-                  S'inscrire
-                </a>
-              </p>
             </div>
+            <a href="javascript:void(0)" class="mb-2 inline-block text-base text-[#adadad] hover:text-primary">
+              Vous avez oublié votre mot de passe ?
+            </a>
+            <p class="text-base text-[#adadad]">
+              Pas encore inscrit ?
+              <a href="signup.html" class="text-primary hover:underline">
+                S'inscrire
+              </a>
+            </p>
           </div>
         </div>
       </div>
-    </section>
-    <!-- ====== Forms Section End -->
+    </div>
+  </section>
+  <!-- ====== Forms Section End -->
 
-      <!-- ====== Footer Section Start -->
+  <!-- ====== Footer Section Start -->
   <footer class="wow fadeInUp relative z-10 bg-primary pt-20 lg:pt-[120px]" data-wow-delay=".15s">
     <div class="container">
       <div class="-mx-4 flex flex-wrap">
@@ -516,57 +454,66 @@
     </div>
   </footer>
 
-    <!-- ====== Back To Top Start -->
-    <a
-      href="javascript:void(0)"
-      class="back-to-top fixed bottom-8 right-8 left-auto z-[999] hidden h-10 w-10 items-center justify-center rounded-md bg-primary text-white shadow-md transition duration-300 ease-in-out hover:bg-dark"
-    >
-      <span
-        class="mt-[6px] h-3 w-3 rotate-45 border-t border-l border-white"
-      ></span>
-    </a>
-    <!-- ====== Back To Top End -->
+  <!-- ====== Back To Top Start -->
+  <a href="javascript:void(0)"
+    class="back-to-top fixed bottom-8 right-8 left-auto z-[999] hidden h-10 w-10 items-center justify-center rounded-md bg-primary text-white shadow-md transition duration-300 ease-in-out hover:bg-dark">
+    <span class="mt-[6px] h-3 w-3 rotate-45 border-t border-l border-white"></span>
+  </a>
+  <!-- ====== Back To Top End -->
 
-    <!-- ====== All Scripts -->
-    <script src="assets/js/main.js"></script>
+  <!-- ====== All Scripts -->
+  <script src="assets/js/main.js"></script>
 
-    <script src="./services/api.js" type="module"></script>
+  <script src="./services/api.js" type="module"></script>
 
-    <script type="module">
-  
-      import ApiService from './services/api.js';
-  
-      const api = new ApiService();
-  
-  
-      document.addEventListener("DOMContentLoaded", (event) => {
-        async function submit() {
-          try {
-            const response = await api.call('/auth/login', 'POST', {
-              mail: document.getElementById('mail').value,
-              password: document.getElementById('password').value,
-            });
-  
-            window.location.href = response.url
-          } catch (error) {
-            console.error(error);
-  
-            const errorMessageContainer = document.getElementById('ErrorMessage');
-            errorMessageContainer.innerHTML = ''; 
-  
-            const errorMessage = document.createElement('p');
-            errorMessage.textContent = "Oups, votre pseudo et mail ne correspondent pas. Veuillez re-essayez.";
-            errorMessage.style.color = 'red';
-  
-            errorMessageContainer.appendChild(errorMessage);
+  <script type="module">
+
+    import ApiService from './services/api.js';
+
+    const api = new ApiService();
+
+
+    document.addEventListener("DOMContentLoaded", (event) => {
+      async function submit() {
+        try {
+          const response = await api.call('/auth/login', 'POST', {
+            mail: document.getElementById('mail').value,
+            password: document.getElementById('password').value,
+          });
+
+
+          const myHeaders = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'your-token'
+          });
+          /* console.log(response.id, response.token) */
+
+          if (response.id != null && response.token != null) {
+            window.location.replace("http://localhost:3000/profil.html")
           }
+
+
+          /* window.location.href = response.url */
+        } catch (error) {
+          console.error(error);
+
+          const errorMessageContainer = document.getElementById('ErrorMessage');
+          errorMessageContainer.innerHTML = '';
+
+          const errorMessage = document.createElement('p');
+          errorMessage.textContent = "Oups, votre pseudo et mail ne correspondent pas. Veuillez re-essayez.";
+          errorMessage.style.color = 'red';
+
+          errorMessageContainer.appendChild(errorMessage);
         }
-  
-        document.getElementById('loginUsers').addEventListener('click', submit)
-      });
-  
-    </script>
+      }
+
+      document.getElementById('loginUsers').addEventListener('click', submit)
+    });
+
+  </script>
 
 
-  </body>
+</body>
+
 </html>
