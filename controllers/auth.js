@@ -1,5 +1,5 @@
 import User from '../models/users.js';
-import  { generateToken }  from '../utils/utils.js';
+import { generateToken } from '../utils/utils.js';
 import { checkPassword } from '../utils/utils.js';
 
 export const signupUser = async (req, res) => {
@@ -53,10 +53,16 @@ export const loginUser = async (req, res) => {
     const token = await generateToken(user);
 
     // Redirection vers la page profil.html avec le token et l'identifiant
-    res.redirect(`/public/profil.html?id=${user._id}&token=${token}`);
+
+return res.send({url:`/public/profil.html?id=${user._id}&token=${token}`})
+
+    /* return res.redirect(`/public/profil.html?id=${user._id}&token=${token}`); */
+
   } catch (error) {
     console.log("Erreur lors de la connexion de l'utilisateur :", error);
-    res.status(500).json({ message: "Une erreur s'est produite lors de la connexion de l'utilisateur" });
+
+    return res.status(500).json({ message: "Une erreur s'est produite lors de la connexion de l'utilisateur" });
+
   }
 };
 

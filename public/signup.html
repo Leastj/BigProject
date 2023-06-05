@@ -129,6 +129,7 @@
               </a>
             </div>
             <div>
+              <div id="ErrorMessage"></div>
               <div class="mb-6">
                 <input type="text" id="pseudo" name="pseudo" placeholder="Pseudo"
                   class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none transition focus:border-primary focus-visible:shadow-none"
@@ -144,7 +145,8 @@
                   class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none transition focus:border-primary focus-visible:shadow-none"
                   required />
               </div>
-              <button onclick="submit()" type="submit" class="bg-primary text-white font-semibold py-3 px-8 rounded-md shadow-md hover:bg-primary-dark transition duration-300">
+              <button id="creatUsers" type="submit"
+                class="bg-primary text-white font-semibold py-3 px-8 rounded-md shadow-md hover:bg-primary-dark transition duration-300">
                 Créer mon compte
               </button>
 
@@ -152,34 +154,34 @@
 
 
 
-            <p class="mb-4 text-base text-[#adadad]">
-              En créant un compte vous acceptez:
-              <a href="javascript:void(0)" class="text-primary hover:underline">
-                Privacy
-              </a>
-              and
-              <a href="javascript:void(0)" class="text-primary hover:underline">
-                Policy
-              </a>
-            </p>
+              <p class="mb-4 text-base text-[#adadad]">
+                En créant un compte vous acceptez:
+                <a href="javascript:void(0)" class="text-primary hover:underline">
+                  Privacy
+                </a>
+                and
+                <a href="javascript:void(0)" class="text-primary hover:underline">
+                  Policy
+                </a>
+              </p>
 
-            <p class="text-base text-[#adadad]">
-              Oups, vous avez un compte chez nous ?
-              <a href="signin.html" class="text-primary hover:underline">
-                Se connecter
-              </a>
-            </p>
+              <p class="text-base text-[#adadad]">
+                Oups, vous avez un compte chez nous ?
+                <a href="signin.html" class="text-primary hover:underline">
+                  Se connecter
+                </a>
+              </p>
 
-            <div>
+              <div>
 
 
-              </svg>
-              </span>
+                </svg>
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
   </section>
   <!-- ====== Forms Section End -->
 
@@ -485,28 +487,42 @@
   <!-- ====== All Scripts -->
   <script src="assets/js/main.js"></script>
 
-  <script type="module">
-    
-    import * as api from './services/api.js';
+  <script src="./services/api.js" type="module"></script>
 
-async function submit() {
-  try {
-    const response = await api.call('/auth/signup', 'POST', {
-      pseudo: document.getElementById('pseudo').value,
-      mail: document.getElementById('mail').value,
-      password: document.getElementById('password').value,
+  <script type="module">
+
+    import ApiService from './services/api.js';
+
+    const api = new ApiService();
+
+
+    document.addEventListener("DOMContentLoaded", (event) => {
+      async function submit() {
+        try {
+          const response = await api.call('/auth/signup', 'POST', {
+            pseudo: document.getElementById('pseudo').value,
+            mail: document.getElementById('mail').value,
+            password: document.getElementById('password').value,
+          });
+
+          window.location.href = './profil.html';
+        } catch (error) {
+          console.error(error);
+
+          const errorMessageContainer = document.getElementById('ErrorMessage');
+          errorMessageContainer.innerHTML = ''; 
+
+          const errorMessage = document.createElement('p');
+          errorMessage.textContent = "Oups, votre pseudo ou mail existe déjà.";
+          errorMessage.style.color = 'red';
+
+          errorMessageContainer.appendChild(errorMessage);
+        }
+      }
+
+      document.getElementById('creatUsers').addEventListener('click', submit)
     });
 
-    window.location.href = './public/profil.html';
-  } catch (error) {
-    console.error(error);
-
-    const errorMessage = document.createElement('p');
-    errorMessage.textContent = 'Une erreur s\'est produite lors de la création du compte. Veuillez réessayer plus tard.';
-    errorMessage.style.color = 'red';
-    document.body.appendChild(errorMessage);
-  }
-}
   </script>
 
 
