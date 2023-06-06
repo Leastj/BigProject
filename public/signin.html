@@ -472,19 +472,11 @@
 
     const api = new ApiService();
 
-
-    document.addEventListener("DOMContentLoaded", (event) => {
       async function submit() {
         try {
           const response = await api.call('/auth/login', 'POST', {
             mail: document.getElementById('mail').value,
             password: document.getElementById('password').value,
-          });
-
-
-          const myHeaders = new Headers({
-            'Content-Type': 'application/json',
-            'Authorization': 'your-token'
           });
           /* console.log(response.id, response.token) */
 
@@ -509,7 +501,6 @@
       }
 
       document.getElementById('loginUsers').addEventListener('click', submit)
-    });
 
   </script>
 

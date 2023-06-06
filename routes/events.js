@@ -4,7 +4,7 @@ import * as events from '../controllers/events.js'
 
 const router = express.Router();
 
-router.get('/get-events', events.getEvents)
+router.get('/', events.getEvents)
 router.get('/:eventID', events.getEvent)
 router.post('/', events.createEvent)
 router.put('/:eventID', events.updateEvent)

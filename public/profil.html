@@ -7,17 +7,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bienvenue sur votre profil | Tourney Genious</title>
   <link rel="shortcut icon" href="assets/images/logo/favicon.svg" type="image/x-icon" />
-  <link rel="stylesheet" href="assets/css/animate.css" />
   <link rel="stylesheet" href="assets/css/tailwind.css" />
+  <link rel="stylesheet" href="assets/css/custom.css" />
 
-  <!-- ==== WOW JS ==== -->
+
+
 
 </head>
 
 <body class="bg-primary">
-  
+
+
+
   <!-- ====== Navbar Section Start -->
-  <div class="ud-header absolute top-0 left-0 z-40 flex w-full items-center ">
+  <div class="ud-header absolute top-0 left-0 z-40 flex w-full items-center bg-transparent">
     <div class="container">
       <div class="relative -mx-4 flex items-center justify-between">
         <div class="w-60 max-w-full px-4">
@@ -37,44 +40,350 @@
               class="absolute right-4 top-full hidden w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:py-0 lg:px-4 lg:shadow-none xl:px-6">
               <ul class="blcok lg:flex">
                 <li class="group relative">
-                  <a href="#créer un tournois"
-                    class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">
+                  <a href="#" id="openpopup"
+                    class="ud-menu-scroll mx-8 flex items-center py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">
+                    <ion-icon name="game-controller" class="icon-large"></ion-icon>
                     Créer un tournois
                   </a>
+
                 </li>
                 <li class="group relative">
-                  <a href="#mes tournois"
-                    class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">
+                  <a href="#Mes tournois"
+                    class="ud-menu-scroll mx-8 flex items-center py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">
+                    <ion-icon name="flash" class="icon-large"></ion-icon>
                     Mes tournois
                   </a>
                 </li>
-              </ul>
-            </nav>
+
           </div>
-          <div style="display: inline-flex; justify-content: center; align-items: center;">
-            <span id="username" class="mr-4 text-white"></span>
-            <a href="#" id="logoutBtn"
-              class="rounded-lg bg-opacity-100 py-4 px-4 text-base font-medium text-white duration-300 hover:bg-opacity-100 hover:text-white hover:bg-931433"
-              style="min-width: 120px; height: 40px; border:0px solid white; border-radius: 32px; flex: none; order: 2; flex-grow: 0; display: flex; align-items: center; justify-content: center;">
-              Se déconnecter
-            </a>
-          </div>
-          </div>
+          </li>
+          </ul>
+          </nav>
+        </div>
+        <div style="display: inline-flex; justify-content: center; align-items: center;">
+          <a href="index.html"
+            class="rounded-lg bg-white py-4 px-4 text-base font-medium text-dark duration-300 hover:bg-opacity-100 hover:text-dark hover:bg-931433"
+            style="min-width: 120px; height: 40px; background: #ECECEC; border-radius: 32px; flex: none; order: 3; flex-grow: 0; display: flex; align-items: center; justify-content: center;">
+            Se déconnecter
+          </a>
+        </div>
       </div>
     </div>
-    </div>
-    
+  </div>
   <!-- ====== Navbar Section End -->
 
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-content">
 
-  
+
+          <div id="createEventPopup" class="popup">
+            <div class="popup-content">
+              <ion-icon id="closePopupIcon" name="close-circle"
+                class="close-icon bg-\[\#6A0C23\] icon-large"></ion-icon>
+
+              <!-- Formulaire de création d'événement -->
+
+
+
+              <div class="mb-6">
+
+                Titre de l'événement
+                <input type="text" id="titleEvent" name="titleEvent" placeholder="Ex: Road Redeption battle"
+                  class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none transition focus:border-primary focus-visible:shadow-none"
+                  required />
+              </div>
+
+              <div class="mb-6">
+                Nombre de participants
+                <input type="text" id="nombreParticipants" name="nombreParticipants" placeholder="Entrez un nombre pair"
+                  class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none transition focus:border-primary focus-visible:shadow-none"
+                  required />
+                <span id="error-nombreParticipants" class="error-message"></span>
+              </div>
+
+              <div class="mb-6">
+                Début de l'événement
+                <input type="date" id="dateDebut" name="dateDebut"
+                  class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none transition focus:border-primary focus-visible:shadow-none"
+                  required />
+              </div>
+              <div class="mb-6">
+                Fin de l'événement
+                <input type="date" id="dateFin" name="dateFin"
+                  class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none transition focus:border-primary focus-visible:shadow-none"
+                  required />
+                <p id="errorDate" class="error-message"></p>
+              </div>
+
+              <button id="creatEvent" type="submit"
+                class="centered-button bg-primary text-white font-semibold py-3 px-8 rounded-md shadow-md hover:bg-primary-dark transition duration-300">
+                Créer ma compétition
+              </button>
+
+              <div id="popupContainer"></div>
+
+
+
+            </div>
+          </div>
+
+
+          <!-- ***** COMPETITION EN COURS ***** -->
+
+          <div class="container" style="padding-top: 10px; padding-left: 10px;">
+            <h2 class="mb-4 text-3xl font-bold text-primary">
+              <ion-icon name="rocket" class="icon-large"></ion-icon>
+              En cours
+            </h2>
+          </div>
+
+          <!-- ***** FIN COMPETITION EN COURS ***** -->
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-content">
+
+          <!-- ***** COMPETITION EN COURS ***** -->
+
+          <div class="container" style="padding-top: 10px; padding-left: 10px; padding-bottom: 10px;">
+            <h2 class="mb-4 font-bold text-primary text-3xl">
+              <ion-icon name="alarm" class="icon-large"></ion-icon>
+              Les prochaines compétitions
+            </h2>
+
+            <div id="competitionsContainer" class="container"></div>
+
+
+
+          </div>
+
+          <!-- ***** FIN COMPETITION EN COURS ***** -->
+
+        </div>
+      </div>
+    </div>
+
+  </div>
 
 
 
 
+
+
+
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
+
+
+  <script>
+
+    // POPUP SETTINGS
+
+    function openCreateEventPopup() {
+      var popup = document.getElementById("createEventPopup");
+      popup.style.display = "block";
+    }
+
+    function closeCreateEventPopup() {
+      var popup = document.getElementById("createEventPopup");
+      popup.style.display = "none";
+    }
+
+    var openPopup = document.getElementById("openpopup");
+    openPopup.addEventListener("click", openCreateEventPopup);
+
+    var closePopupIcon = document.getElementById("closePopupIcon");
+    closePopupIcon.addEventListener("click", closeCreateEventPopup);
+
+   // FIN POPUP SETTINGS
+
+
+  </script>
+
+
+  <script>
+
+    // POPUP VALIDATION ÉVÉNEMENT
+
+    function showPopup(message) {
+      // Créez un élément de popup, par exemple une div
+      const popup = document.createElement('div');
+      popup.classList.add('popup');
+
+      // Ajoutez le message à la popup
+      const messageElement = document.createElement('p');
+      messageElement.textContent = message;
+      popup.appendChild(messageElement);
+
+      // Ajoutez la popup à votre page, par exemple à un conteneur spécifique
+      const popupContainer = document.getElementById('popupContainer');
+      popupContainer.appendChild(popup);
+
+      // Ajoutez une classe pour afficher la popup avec une animation CSS
+      popup.classList.add('show');
+
+      // Supprimez la popup après un certain délai
+      setTimeout(() => {
+        popupContainer.removeChild(popup);
+      }, 3000); // Supprimez la popup après 3 secondes (ajustez selon vos besoins)
+    }
+
+// FIN POPUP VALIDATION ÉVÉNEMENT
+
+
+  </script>
+
+
+
+  <script>
+
+    // GESTION NOMBRE PAIR NB PARTICIPANT
+
+    const nombreParticipantsInput = document.getElementById('nombreParticipants');
+    const errorNombreParticipants = document.getElementById('error-nombreParticipants');
+
+    nombreParticipantsInput.addEventListener('input', function () {
+      const nombreParticipants = parseInt(nombreParticipantsInput.value);
+
+      if (isNaN(nombreParticipants) || nombreParticipants % 2 !== 0) {
+        errorNombreParticipants.textContent = 'Veuillez entrer un nombre pair.';
+        errorNombreParticipants.style.color = 'red';
+
+      } else {
+        errorNombreParticipants.textContent = '';
+
+
+      }
+    });
+
+     // FIN GESTION NOMBRE PAIR NB PARTICIPANT
+
+  </script>
+
+  <script>
+
+    // GESTION ERREUR DATE DE L'ÉVÉNEMENT
+
+    const dateDebutInput = document.getElementById('dateDebut');
+    const dateFinInput = document.getElementById('dateFin');
+    const errorDateMessage = document.getElementById('errorDate');
+
+    // Fonction pour formater la date au format "AAAA-MM-JJ"
+    function formatDate(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    // Fonction pour afficher une erreur dans le formulaire
+    function showError(message) {
+      errorDateMessage.textContent = message;
+      errorDateMessage.style.color = "red";
+    }
+
+    // Fonction pour effacer l'erreur dans le formulaire
+    function clearError() {
+      errorDateMessage.textContent = '';
+    }
+
+    // Ajouter un écouteur d'événement lorsque la valeur du champ date de début change
+    dateDebutInput.addEventListener('change', function () {
+      clearError();
+
+      const dateDebut = new Date(dateDebutInput.value);
+      const dateFin = new Date(dateFinInput.value);
+      const today = new Date();
+
+      if (dateDebut < today) {
+        showError("Hop hop hop ! La date de début ne peut pas être antérieure à la date d'aujourd'hui.");
+      } else if (dateFin < today) {
+        showError("Hop hop hop ! La date de fin ne peut pas être après à la date actuelle.");
+      } else if (dateDebut > dateFin) {
+        showError("La date de fin ne peut pas être antérieur à la date du jour.");
+      }
+
+    });
+
+    // Ajouter un écouteur d'événement lorsque la valeur du champ date de fin change
+    dateFinInput.addEventListener('change', function () {
+      clearError();
+
+      const dateDebut = new Date(dateDebutInput.value);
+      const dateFin = new Date(dateFinInput.value);
+
+      if (dateDebut > dateFin) {
+        showError("La date de début ne peut pas être postérieure à la date de fin.");
+      }
+    });
+
+// FIN GESTION ERREUR DATE DE L'ÉVÉNEMENT
+  </script>
+
+  <script src="./services/api.js" type="module"></script>
+
+  <script type="module">
+
+
+    // ENVOIE DU FORMULAIRE VERS L'API
+
+    import ApiService from './services/api.js';
+
+    const api = new ApiService();
+
+
+    document.addEventListener("DOMContentLoaded", (event) => {
+      async function submitForm(event) {
+        event.preventDefault(); // Empêche le rechargement de la page par défaut
+
+        // Vérifier les conditions de validation du formulaire
+        try {
+          // Appeler l'API pour soumettre le formulaire
+          const response = await api.call('/events', 'POST', {
+            title: document.getElementById('titleEvent').value,
+            participants: parseInt(document.getElementById('nombreParticipants').value),
+            start_date: document.getElementById('dateDebut').value,
+            end_date: document.getElementById('dateFin').value
+          });
+
+          // Afficher la popup de succès
+          showPopup("Événement créé !");
+        } catch (error) {
+          // Gérer les erreurs et afficher un message d'erreur approprié
+          console.error(error);
+          const errorMessageContainer = document.getElementById('ErrorMessage');
+          errorMessageContainer.innerHTML = '';
+          const errorMessage = document.createElement('p');
+          errorMessage.textContent = "Oups, une erreur s'est produite lors de la création de l'événement.";
+          errorMessage.style.color = 'red';
+          errorMessageContainer.appendChild(errorMessage);
+        }
+      }
+
+      document.getElementById('creatEvent').addEventListener('click', submitForm);
+    });
+
+    // FIN ENVOIE DU FORMULAIRE VERS L'API
+
+  </script>
 
 
 
 </body>
+
+
+
 
 </html>

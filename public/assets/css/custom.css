@@ -1,0 +1,62 @@
+.header-area .container {
+    padding: 0px;
+  }
+
+  body .page-content {
+    margin-top: 110px;
+    background-color: #e5e7eb;
+    padding: 60px;
+    border-radius: 23px;
+  }
+
+
+
+/* ICONS SETTINGS  */
+
+
+.icon-large {
+  font-size: 10px; /* Modifier la taille de l'icône selon vos besoins */
+  vertical-align: middle;
+  margin-right: 8px; /* Ajouter un espace entre l'icône et le texte si nécessaire */
+}
+
+
+/* POPUP SETTING  */
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 1000; /* Valeur supérieure à celle du menu */
+}
+
+.popup-content {
+  position: absolute;
+  top: 50%; /* Ajustez cette valeur selon vos besoins */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70vw;
+  height: 45vw;
+  max-width: 700px; /* Vous pouvez ajuster cette valeur selon vos besoins */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.centered-button {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}

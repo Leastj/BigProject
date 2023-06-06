@@ -1,6 +1,6 @@
 export default class ApiService {
 
-  static API_BASE_URL = 'http://localhost:3000';
+  static API_BASE_URL = 'http://localhost:3000/api';
 
   constructor() {
     if (ApiService.instance instanceof ApiService) {
@@ -16,8 +16,9 @@ export default class ApiService {
     const options = {
       method,
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
+      credentials: "include"
     };
 
     if (data) {

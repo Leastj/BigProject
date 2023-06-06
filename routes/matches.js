@@ -3,7 +3,7 @@ import * as matches from '../controllers/matches.js'
 
 const router = express.Router();
 
-router.get('/get-matches', matches.getMatches)
+router.get('/', matches.getMatches)
 router.get('/: matchID', matches.getMatch)
 router.post('/', matches.createMatch)
 router.put('/:matchID', matches.updateMatch)

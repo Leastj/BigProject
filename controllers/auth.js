@@ -22,8 +22,6 @@ export const signupUser = async (req, res) => {
     const token = await generateToken(user);
 
     // Renvoyez le token dans la réponse
-    
-
     res.status(201).json({ id:user._id,token:token });
   } catch (error) {
     console.error(error)
@@ -41,21 +39,23 @@ export const loginUser = async (req, res) => {
       console.log("Utilisateur introuvable !");
       return res.status(401).json({ message: "L'email ou le mot de passe est incorrect" });
     }
-    console.log("Utilisateur trouvé :", user);
 
     const isPasswordCorrect = checkPassword(password, user.password);
     if (!isPasswordCorrect) {
       // Le mot de passe est incorrect
       return res.status(401).json({ message: "L'email ou le mot de passe est incorrect" });
     }
-    console.log("Mot de passe correct !");
 
     // Générez un token JWT pour cet utilisateur
     const token = await generateToken(user);
+    user.token = token;
+    user.save();
+
+    res.cookie('Authentification', token, { maxAge: 900000000, httpOnly: true });
 
     // Redirection vers la page profil.html avec le token et l'identifiant
-
-    return res.send({id: user._id, token:token})
+    res.json({id: user._id, token:token});
+    return;
 
 /* return res.send({url:`./public/profil.html?id=${user._id}&token=${token}`}) */
 
@@ -64,7 +64,8 @@ export const loginUser = async (req, res) => {
   } catch (error) {
     console.log("Erreur lors de la connexion de l'utilisateur :", error);
 
-    return res.status(500).json({ message: "Une erreur s'est produite lors de la connexion de l'utilisateur" });
+    res.status(500).json({ message: "Une erreur s'est produite lors de la connexion de l'utilisateur" });
+    return
 
   }
 };

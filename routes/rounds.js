@@ -5,7 +5,7 @@ import * as rounds from '../controllers/rounds.js'
 const router = express.Router();
 
 
-router.get('/get-rounds',rounds.getRounds)
+router.get('/',rounds.getRounds)
 router.get('/:roundID', rounds.getRound)
 router.post('/',rounds.createRound)
 router.put('/:roundID' ,rounds.updateRound)
