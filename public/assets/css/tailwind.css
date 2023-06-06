@@ -1150,7 +1150,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .bg-primary {
  
-  background-image: url("/assets/images/logo/background.png");
+   background-image: url("/assets/images/logo/background.png");
   background-repeat: no-repeat;
   background-size: cover;
 }

@@ -8,7 +8,14 @@ const eventSchema = new mongoose.Schema({
     },
     participants: {
         type: Number,
-        required: true
+        required: true,
+        validate: {
+            validator: function(value) {
+              return value % 2 === 0; // Vérifie si le nombre est pair
+            },
+            message: "Le nombre de participants doit être un chiffre pair."
+          }
+        
     },
     start_date:{
         type: Date,
@@ -17,8 +24,7 @@ const eventSchema = new mongoose.Schema({
 end_date:{
     type: Date,
     required: true
-},
-
+}
     
 });
 
