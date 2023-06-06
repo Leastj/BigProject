@@ -9,7 +9,7 @@
   <link rel="shortcut icon" href="assets/images/logo/favicon.svg" type="image/x-icon" />
   <link rel="stylesheet" href="assets/css/tailwind.css" />
   <link rel="stylesheet" href="assets/css/custom.css" />
-
+ 
 
 
 
@@ -47,14 +47,6 @@
                   </a>
 
                 </li>
-                <li class="group relative">
-                  <a href="#Mes tournois"
-                    class="ud-menu-scroll mx-8 flex items-center py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">
-                    <ion-icon name="flash" class="icon-large"></ion-icon>
-                    Mes tournois
-                  </a>
-                </li>
-
           </div>
           </li>
           </ul>
@@ -89,7 +81,7 @@
 
               <div class="mb-6">
 
-                Titre de l'événement
+                Nom du tournois
                 <input type="text" id="titleEvent" name="titleEvent" placeholder="Ex: Road Redeption battle"
                   class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none transition focus:border-primary focus-visible:shadow-none"
                   required />
@@ -119,7 +111,7 @@
 
               <button id="creatEvent" type="submit"
                 class="centered-button bg-primary text-white font-semibold py-3 px-8 rounded-md shadow-md hover:bg-primary-dark transition duration-300">
-                Créer ma compétition
+                Créer mon tournois
               </button>
 
               <div id="popupContainer"></div>
@@ -157,7 +149,7 @@
           <div class="container" style="padding-top: 10px; padding-left: 10px; padding-bottom: 10px;">
             <h2 class="mb-4 font-bold text-primary text-3xl">
               <ion-icon name="alarm" class="icon-large"></ion-icon>
-              Les prochaines compétitions
+              Prochainement...
             </h2>
 
             <div id="competitionsContainer" class="container"></div>
@@ -212,40 +204,7 @@
 
   </script>
 
-
-  <script>
-
-    // POPUP VALIDATION ÉVÉNEMENT
-
-    function showPopup(message) {
-      // Créez un élément de popup, par exemple une div
-      const popup = document.createElement('div');
-      popup.classList.add('popup');
-
-      // Ajoutez le message à la popup
-      const messageElement = document.createElement('p');
-      messageElement.textContent = message;
-      popup.appendChild(messageElement);
-
-      // Ajoutez la popup à votre page, par exemple à un conteneur spécifique
-      const popupContainer = document.getElementById('popupContainer');
-      popupContainer.appendChild(popup);
-
-      // Ajoutez une classe pour afficher la popup avec une animation CSS
-      popup.classList.add('show');
-
-      // Supprimez la popup après un certain délai
-      setTimeout(() => {
-        popupContainer.removeChild(popup);
-      }, 3000); // Supprimez la popup après 3 secondes (ajustez selon vos besoins)
-    }
-
-// FIN POPUP VALIDATION ÉVÉNEMENT
-
-
-  </script>
-
-
+  
 
   <script>
 
@@ -346,10 +305,14 @@
 
     document.addEventListener("DOMContentLoaded", (event) => {
       async function submitForm(event) {
+
+
+
         event.preventDefault(); // Empêche le rechargement de la page par défaut
 
-        // Vérifier les conditions de validation du formulaire
+       
         try {
+
           // Appeler l'API pour soumettre le formulaire
           const response = await api.call('/events', 'POST', {
             title: document.getElementById('titleEvent').value,
@@ -357,9 +320,12 @@
             start_date: document.getElementById('dateDebut').value,
             end_date: document.getElementById('dateFin').value
           });
+          console.log("Réponse de l'API :", response);
 
-          // Afficher la popup de succès
-          showPopup("Événement créé !");
+           // Afficher un message d'alerte pour indiquer que l'événement a été créé
+      alert("Événement créé !");
+      window.location.replace("http://localhost:3000/profil.html")
+      
         } catch (error) {
           // Gérer les erreurs et afficher un message d'erreur approprié
           console.error(error);
@@ -378,7 +344,6 @@
     // FIN ENVOIE DU FORMULAIRE VERS L'API
 
   </script>
-
 
 
 </body>
