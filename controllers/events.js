@@ -51,9 +51,10 @@ export const deleteEvent = async (req, res) => {
     try {
         const event = await Event.findByIdAndDelete(req.params.eventID);
         if (!event) {
-            return res.status(404).send({ message: 'Event not found' });
+            res.status(404).send({ message: 'Event not found' });
+            return
         }
-        res.send(event);
+        res.send(true);
     } catch (error) {
         res.status(500).send(error);
     }
@@ -106,3 +107,9 @@ export const cancelEvent = async (req, res) => {
           res.status(500).json({ error: error.message });
         }
       };
+
+
+      export const participate = async (req, res) => {
+        req.user
+        req.params.eventID
+      }

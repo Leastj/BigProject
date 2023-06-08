@@ -4,14 +4,16 @@
 
   body .page-content {
     margin-top: 110px;
-    background-color: #e5e7eb;
+    /* background-color: #e5e7eb; */
+    background-color: white;
     padding: 60px;
     border-radius: 23px;
   }
 
 
 
-/* ICONS SETTINGS  */
+
+/* ============== POPUP SETTING ================ */
 
 
 .icon-large {
@@ -21,7 +23,8 @@
 }
 
 
-/* POPUP SETTING  */
+
+/* ============== POPUP SETTING ================ */
 
 .popup {
   position: fixed;
@@ -59,4 +62,53 @@
   display: block;
   margin: 0 auto;
   text-align: center;
+}
+
+
+/* ============== CARD EVENTS SETTING ================ */
+
+
+.card-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  
+  .card {
+    background-color: #e5e7eb;
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 10px;
+    width: 300px;
+  }
+  
+  .card h3 {
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  .card p {
+    font-family: Arial, sans-serif;
+    color: #777;
+  }
+  
+  .card .date {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .card .participate-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .card .participate-button:hover {
+    background-color: #0056b3;
+  }
 }

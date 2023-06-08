@@ -7,11 +7,10 @@ const router = express.Router();
 router.get('/', events.getEvents)
 router.get('/:eventID', events.getEvent)
 router.post('/', events.createEvent)
+router.post('/:eventID/participate',events.participate)
 router.put('/:eventID', events.updateEvent)
 router.delete('/:eventID',events.deleteEvent)
-router.post('/:eventID', events.cancelEvent)
-router.post('/:eventID', events.sendInvitation)
-router.post('/:eventID', events.finishEvent)
+router.post('/:eventID/invite/:userID', events.sendInvitation)
 
 
 export default router

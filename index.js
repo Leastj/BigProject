@@ -44,7 +44,7 @@ app.use(express.static('public'))
 app.use("/api", async (req, res, next) => {
   res.set({
     "Access-Control-Allow-Credentials": true,
-    "Access-Control-Allow-Origin": req.header.origin,
+    "Access-Control-Allow-Origin": req.headers.origin,
     "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE",
     "Access-Control-Allow-Headers": "Content-Type, *"
   })
@@ -55,7 +55,6 @@ app.use("/api", async (req, res, next) => {
   const token = req.cookies.Authentification;
   if (token) {
     req.user = await User.findOne({ token });
-    console.log(req.user)
     if (req.user) {
       next();
     }

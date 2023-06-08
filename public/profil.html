@@ -9,9 +9,10 @@
   <link rel="shortcut icon" href="assets/images/logo/favicon.svg" type="image/x-icon" />
   <link rel="stylesheet" href="assets/css/tailwind.css" />
   <link rel="stylesheet" href="assets/css/custom.css" />
- 
 
 
+  <script src="/assets/js/services/api.js"></script>
+  <script src="/assets/js/profil.js"></script>
 
 </head>
 
@@ -77,8 +78,6 @@
 
               <!-- Formulaire de création d'événement -->
 
-
-
               <div class="mb-6">
 
                 Nom du tournois
@@ -122,7 +121,7 @@
           </div>
 
 
-          <!-- ***** COMPETITION EN COURS ***** -->
+          <!-- ***** EN COURS ***** -->
 
           <div class="container" style="padding-top: 10px; padding-left: 10px;">
             <h2 class="mb-4 text-3xl font-bold text-primary">
@@ -131,7 +130,7 @@
             </h2>
           </div>
 
-          <!-- ***** FIN COMPETITION EN COURS ***** -->
+          <!-- ***** FIN EN COURS ***** -->
 
         </div>
       </div>
@@ -144,7 +143,7 @@
       <div class="col-lg-12">
         <div class="page-content">
 
-          <!-- ***** COMPETITION EN COURS ***** -->
+          <!-- ***** PROCHAINEMENT ***** -->
 
           <div class="container" style="padding-top: 10px; padding-left: 10px; padding-bottom: 10px;">
             <h2 class="mb-4 font-bold text-primary text-3xl">
@@ -152,13 +151,21 @@
               Prochainement...
             </h2>
 
-            <div id="competitionsContainer" class="container"></div>
+            <div id="competitionsContainer" class="card-container">
 
 
+            </div>
+
+            <script>
+              document.addEventListener('DOMContentLoaded', generateEventCards);
+            </script>
 
           </div>
 
-          <!-- ***** FIN COMPETITION EN COURS ***** -->
+
+
+
+          <!-- ***** PROCHAINEMENT ***** -->
 
         </div>
       </div>
@@ -171,180 +178,9 @@
 
 
 
-
-
+  <!-- ***** LIBRAIRIE ICON ***** -->
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
-
-
-
-  <script>
-
-    // POPUP SETTINGS
-
-    function openCreateEventPopup() {
-      var popup = document.getElementById("createEventPopup");
-      popup.style.display = "block";
-    }
-
-    function closeCreateEventPopup() {
-      var popup = document.getElementById("createEventPopup");
-      popup.style.display = "none";
-    }
-
-    var openPopup = document.getElementById("openpopup");
-    openPopup.addEventListener("click", openCreateEventPopup);
-
-    var closePopupIcon = document.getElementById("closePopupIcon");
-    closePopupIcon.addEventListener("click", closeCreateEventPopup);
-
-   // FIN POPUP SETTINGS
-
-
-  </script>
-
-  
-
-  <script>
-
-    // GESTION NOMBRE PAIR NB PARTICIPANT
-
-    const nombreParticipantsInput = document.getElementById('nombreParticipants');
-    const errorNombreParticipants = document.getElementById('error-nombreParticipants');
-
-    nombreParticipantsInput.addEventListener('input', function () {
-      const nombreParticipants = parseInt(nombreParticipantsInput.value);
-
-      if (isNaN(nombreParticipants) || nombreParticipants % 2 !== 0) {
-        errorNombreParticipants.textContent = 'Veuillez entrer un nombre pair.';
-        errorNombreParticipants.style.color = 'red';
-
-      } else {
-        errorNombreParticipants.textContent = '';
-
-
-      }
-    });
-
-     // FIN GESTION NOMBRE PAIR NB PARTICIPANT
-
-  </script>
-
-  <script>
-
-    // GESTION ERREUR DATE DE L'ÉVÉNEMENT
-
-    const dateDebutInput = document.getElementById('dateDebut');
-    const dateFinInput = document.getElementById('dateFin');
-    const errorDateMessage = document.getElementById('errorDate');
-
-    // Fonction pour formater la date au format "AAAA-MM-JJ"
-    function formatDate(date) {
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
-      return `${year}-${month}-${day}`;
-    }
-
-    // Fonction pour afficher une erreur dans le formulaire
-    function showError(message) {
-      errorDateMessage.textContent = message;
-      errorDateMessage.style.color = "red";
-    }
-
-    // Fonction pour effacer l'erreur dans le formulaire
-    function clearError() {
-      errorDateMessage.textContent = '';
-    }
-
-    // Ajouter un écouteur d'événement lorsque la valeur du champ date de début change
-    dateDebutInput.addEventListener('change', function () {
-      clearError();
-
-      const dateDebut = new Date(dateDebutInput.value);
-      const dateFin = new Date(dateFinInput.value);
-      const today = new Date();
-
-      if (dateDebut < today) {
-        showError("Hop hop hop ! La date de début ne peut pas être antérieure à la date d'aujourd'hui.");
-      } else if (dateFin < today) {
-        showError("Hop hop hop ! La date de fin ne peut pas être après à la date actuelle.");
-      } else if (dateDebut > dateFin) {
-        showError("La date de fin ne peut pas être antérieur à la date du jour.");
-      }
-
-    });
-
-    // Ajouter un écouteur d'événement lorsque la valeur du champ date de fin change
-    dateFinInput.addEventListener('change', function () {
-      clearError();
-
-      const dateDebut = new Date(dateDebutInput.value);
-      const dateFin = new Date(dateFinInput.value);
-
-      if (dateDebut > dateFin) {
-        showError("La date de début ne peut pas être postérieure à la date de fin.");
-      }
-    });
-
-// FIN GESTION ERREUR DATE DE L'ÉVÉNEMENT
-  </script>
-
-  <script src="./services/api.js" type="module"></script>
-
-  <script type="module">
-
-
-    // ENVOIE DU FORMULAIRE VERS L'API
-
-    import ApiService from './services/api.js';
-
-    const api = new ApiService();
-
-
-    document.addEventListener("DOMContentLoaded", (event) => {
-      async function submitForm(event) {
-
-
-
-        event.preventDefault(); // Empêche le rechargement de la page par défaut
-
-       
-        try {
-
-          // Appeler l'API pour soumettre le formulaire
-          const response = await api.call('/events', 'POST', {
-            title: document.getElementById('titleEvent').value,
-            participants: parseInt(document.getElementById('nombreParticipants').value),
-            start_date: document.getElementById('dateDebut').value,
-            end_date: document.getElementById('dateFin').value
-          });
-          console.log("Réponse de l'API :", response);
-
-           // Afficher un message d'alerte pour indiquer que l'événement a été créé
-      alert("Événement créé !");
-      window.location.replace("http://localhost:3000/profil.html")
-      
-        } catch (error) {
-          // Gérer les erreurs et afficher un message d'erreur approprié
-          console.error(error);
-          const errorMessageContainer = document.getElementById('ErrorMessage');
-          errorMessageContainer.innerHTML = '';
-          const errorMessage = document.createElement('p');
-          errorMessage.textContent = "Oups, une erreur s'est produite lors de la création de l'événement.";
-          errorMessage.style.color = 'red';
-          errorMessageContainer.appendChild(errorMessage);
-        }
-      }
-
-      document.getElementById('creatEvent').addEventListener('click', submitForm);
-    });
-
-    // FIN ENVOIE DU FORMULAIRE VERS L'API
-
-  </script>
-
 
 </body>
 

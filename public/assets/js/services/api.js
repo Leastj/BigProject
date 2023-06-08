@@ -1,4 +1,4 @@
-export default class ApiService {
+class ApiService {
 
   static API_BASE_URL = 'http://localhost:3000/api';
 
@@ -25,14 +25,19 @@ export default class ApiService {
       options.body = JSON.stringify(data);
     }
 
-    const response = await fetch(url, options);
-    const responseData = await response.json();
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        window.location.replace("/")
+        return
+        //throw new Error(responseData.message || 'Une erreur est survenue lors de l\'appel de l\'API.');
+      }
 
-    if (!response.ok) {
-      throw new Error(responseData.message || 'Une erreur est survenue lors de l\'appel de l\'API.');
+      const responseData = await response.json();
+      return responseData;
+    } catch (err) {
+      window.location.replace("/")
     }
-
-    return responseData;
   }
 
   async signin(data) {
@@ -61,3 +66,5 @@ export default class ApiService {
   }
 
 }
+
+const API = new ApiService();
