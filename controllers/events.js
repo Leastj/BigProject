@@ -109,25 +109,28 @@ export const cancelEvent = async (req, res) => {
         } catch (error) {
           res.status(500).json({ error: error.message });
         }
-      };
+      }
 
 // FONCTION VÉRIFICATION EVENT FULL
 
-export const isEventFull = async (req, res) => {
+export const isEventFull = async (eventId) => {
   try {
-    const event = await Event.findById(eventID);
-    if(!event){
-      throw new Error ('Event not find');
+    const event = await Event.findById(eventId);
+    if (!event) {
+      throw new Error('Event not found');
     }
 
-  const participantsCount = await matches.countDocuments({
-    eventID: event,
-  });
-  return participantsCount >= event.maxParticipants;
+    const matches = await getAllMatches(eventId);
+
+    const participantsCount = await matches.countDocuments({
+      eventID: event,
+    });
+
+    return participantsCount >= event.maxParticipants;
   } catch (error) {
-    throw new error ('Failed to check event availability');
+    throw new Error('Failed to check event availability');
   }
- };
+};
 
 
 // FONCTION POUR PARTICIPER À L'ÉVÉNEMENT
@@ -141,7 +144,7 @@ export const isEventFull = async (req, res) => {
       
           const matches = await getAllMatches(eventId);
       
-          while (!isEventFull(eventId)) {
+          while (!await isEventFull(eventId)) {
             if (matches.length === 0 || isMatchFull(matches[matches.length - 1])) {
               const newMatchID = await createMatch(eventId);
               await joinMatch(newMatchID, userId, 'player1');

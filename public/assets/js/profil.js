@@ -1,8 +1,5 @@
 
 
-
-
-
 // RÉCUPÉRER TOUT LES ÉVÉNEMENTS 
 
 async function generateEventCards() {
@@ -17,14 +14,24 @@ async function generateEventCards() {
         const card = document.createElement('div');
         card.classList.add('card');
 
+        const startDate = new Date(event.start_date);
+        const endDate = new Date(event.end_date);
+
+        const formattedStartDate = `${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`;
+        const formattedEndDate = `${endDate.getDate()}/${endDate.getMonth() + 1}/${endDate.getFullYear()}`;
+
         card.innerHTML = `
-          <h3>${event.title}</h3>
-          <p class="date">Date de début : ${event.start_date}</p>
-          <p class="date">Date de fin : ${event.end_date}</p>
-          <button class="participate-button" data-event-id="${event.id}" data-max-participants="${event.maxParticipants}">
-            Participer
-          </button>
-        `;
+        <h3>${event.title}</h3>
+        <div class ="information">
+        <p class="date">Date de début : ${formattedStartDate}</p>
+        <p class="date">Date de fin : ${formattedEndDate}</p>
+        <p class="participantName">Participants:</p>
+        <p class="participants">${event.maxParticipants}/${event.participants}</p>
+        </div>
+        <button class="participate-button" data-event-id="${event.id}" data-max-participants="${event.maxParticipants}">
+          Participer
+        </button>
+      `;
         eventsContainer.appendChild(card);
       });
 
@@ -110,13 +117,6 @@ async function submitForm(event) {
     errorMessageContainer.appendChild(errorMessage);
   }
 }
-
-
-
-
-
-
-
 
 
 

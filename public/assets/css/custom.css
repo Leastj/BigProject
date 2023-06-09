@@ -73,6 +73,7 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 10px;
+
   }
   
   .card {
@@ -80,26 +81,57 @@
     border-radius: 5px;
     padding: 10px;
     margin-right: 10px;
-    width: 300px;
+    flex: 0 0 300px; /* Largeur fixe de 300 pixels */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrer horizontalement les éléments */
+    justify-content: center;
+    height: 300px;
   }
   
+  .information{
+margin-top: 5%;
+  }
+
+  .participantName{
+    font-size: 18px;
+    font-weight: bold;
+text-align: center;
+    color: #777;
+    text-align: center;
+    margin-top: 5%;
+  }
+  
+  .participants{
+    font-size: 18px;
+    font-weight: bold;
+text-align: center;
+    color: #931433;
+    text-align: center;
+    
+  }
+
+
   .card h3 {
     font-size: 1.25rem;
     line-height: 1.75rem;
     margin-bottom: 0.75rem;
     font-weight: 700;
-    color: #333;
+    color: #931433;
+    text-align: center;
   }
   
   .card p {
     font-family: Arial, sans-serif;
-    color: #777;
+    
+    text-align: center;
   }
   
   .card .date {
     font-family: Arial, sans-serif;
     font-size: 14px;
     font-weight: bold;
+text-align: center;
   }
   
   .card .participate-button {
@@ -108,6 +140,8 @@
     color: white;
     border: none;
     border-radius: 5px;
+    margin-top: auto; /* Fixer le bouton en bas */
+    margin-bottom: 20px;
     padding: 5px 10px;
     cursor: pointer;
   }
