@@ -171,4 +171,4 @@ export const isEventFull = async (eventId) => {
       */
     
 
-// REJOINDRE UN MATCH OU CRÉER UN NOUVEAU MATCH SI COMPLET JUSQU'À MAX PARTICIPANT
+
