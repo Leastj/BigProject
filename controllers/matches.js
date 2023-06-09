@@ -9,6 +9,17 @@ export const getMatches = async (req, res) => {
     }
 };
 
+
+export const getAllMatches = async (eventID) => {
+    try {
+      const matches = await Match.find({ eventID });
+      return matches;
+    } catch (error) {
+      throw new Error('Erreur lors de la récupération des matches.');
+    }
+  };
+
+
 export const getMatch = async (req, res) => {
     try {
         const match = await Match.findById(req.params.matchID);
@@ -96,5 +107,12 @@ export const cancelMatch = async (req, res) => {
       res.status(500).send(error);
     }
   }; 
+
+
+
+  // CRÉER joinMatch
+  // CRÉER isMatchFull
+  // CRÉER addParticipanttoMatch
+
 
 

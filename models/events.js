@@ -6,16 +6,9 @@ const eventSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    participants: {
+    maxParticipants: {
         type: Number,
-        required: true,
-        validate: {
-            validator: function(value) {
-              return value % 2 === 0; // Vérifie si le nombre est pair
-            },
-            message: "Le nombre de participants doit être un chiffre pair."
-          }
-        
+        required: true
     },
     start_date:{
         type: Date,

@@ -84,7 +84,10 @@
   }
   
   .card h3 {
-    font-family: Arial, sans-serif;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
     color: #333;
   }
   
@@ -100,7 +103,8 @@
   }
   
   .card .participate-button {
-    background-color: #007bff;
+    background-image: url("/assets/images/logo/background.png");
+    background-size: cover;
     color: white;
     border: none;
     border-radius: 5px;
@@ -108,7 +112,4 @@
     cursor: pointer;
   }
   
-  .card .participate-button:hover {
-    background-color: #0056b3;
-  }
-}
+

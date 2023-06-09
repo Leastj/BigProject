@@ -1,3 +1,8 @@
+
+
+
+
+
 // RÉCUPÉRER TOUT LES ÉVÉNEMENTS 
 
 async function generateEventCards() {
@@ -37,35 +42,7 @@ async function generateEventCards() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', generateEventCards);
-
-
-
-
-// FONCTION POUR PARTICIPER À L'ÉVÉNEMENT
-
-async function participateEvent(event) {
-  const eventId = event.target.dataset.eventId;
-  const maxParticipants = parseInt(event.target.dataset.maxParticipants);
-
-  // Vérifiez si le nombre de participants est atteint
-  if (maxParticipants > 0) {
-    try {
-      // Appeler l'API pour enregistrer la participation de l'utilisateur
-      const response = await API.call(`/events/${eventId}/participate`, 'POST', {
-        userId: userId // Remplacez userId par l'ID de l'utilisateur actuel
-      });
-
-      // Indication à l'utilisateur qu'il participe
-      event.target.textContent = 'Accéder au tournois';
-      event.target.disabled = true;
-    } catch (error) {
-      console.error(error);
-    }
-  } else {
-    alert('Le tournoi est complet.');
-  }
-}
+document.addEventListener("DOMContentLoaded", generateEventCards);
 
 
 
@@ -146,9 +123,7 @@ async function submitForm(event) {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-
-
-  
+ // AFFICHER LES ÉVÉNEMENTS 
 
   // OPEN POPUP
 
