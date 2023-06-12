@@ -2,6 +2,8 @@
 
 // RÉCUPÉRER TOUT LES ÉVÉNEMENTS 
 
+import { participateEvent } from "../../../controllers/events";
+
 async function generateEventCards() {
   const eventsContainer = document.getElementById('competitionsContainer');
   eventsContainer.innerHTML = ''; // Vider le conteneur avant de générer les cartes
@@ -118,12 +120,11 @@ async function submitForm(event) {
   }
 }
 
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
 
- // AFFICHER LES ÉVÉNEMENTS 
+  // AFFICHER LES ÉVÉNEMENTS 
+
+
 
   // OPEN POPUP
 
@@ -135,58 +136,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// GESTION ERREUR DATE DE L'ÉVÉNEMENT
+  // GESTION ERREUR DATE DE L'ÉVÉNEMENT
 
-const dateDebutInput = document.getElementById('dateDebut');
-const dateFinInput = document.getElementById('dateFin');
-const errorDateMessage = document.getElementById('errorDate');
-
-
-
-// Ajouter un écouteur d'événement lorsque la valeur du champ date de début change
-dateDebutInput.addEventListener('change', function () {
-  clearError();
-
-  const dateDebut = new Date(dateDebutInput.value);
-  const dateFin = new Date(dateFinInput.value);
-  const today = new Date();
-
-  if (dateDebut < today) {
-    showError("Hop hop hop ! La date de début ne peut pas être antérieure à la date d'aujourd'hui.");
-  } else if (dateFin < today) {
-    showError("Hop hop hop ! La date de fin ne peut pas être après à la date actuelle.");
-  } else if (dateDebut > dateFin) {
-    showError("La date de fin ne peut pas être antérieur à la date du jour.");
-  }
-
-});
-
-// Ajouter un écouteur d'événement lorsque la valeur du champ date de fin change
-dateFinInput.addEventListener('change', function () {
-  clearError();
-
-  const dateDebut = new Date(dateDebutInput.value);
-  const dateFin = new Date(dateFinInput.value);
-
-  if (dateDebut > dateFin) {
-    showError("La date de début ne peut pas être postérieure à la date de fin.");
-  }
-});
+  const dateDebutInput = document.getElementById('dateDebut');
+  const dateFinInput = document.getElementById('dateFin');
+  const errorDateMessage = document.getElementById('errorDate');
 
 
 
+  // Ajouter un écouteur d'événement lorsque la valeur du champ date de début change
+  dateDebutInput.addEventListener('change', function () {
+    clearError();
+
+    const dateDebut = new Date(dateDebutInput.value);
+    const dateFin = new Date(dateFinInput.value);
+    const today = new Date();
+
+    if (dateDebut < today) {
+      showError("Hop hop hop ! La date de début ne peut pas être antérieure à la date d'aujourd'hui.");
+    } else if (dateFin < today) {
+      showError("Hop hop hop ! La date de fin ne peut pas être après à la date actuelle.");
+    } else if (dateDebut > dateFin) {
+      showError("La date de fin ne peut pas être antérieur à la date du jour.");
+    }
+
+  });
+
+  // Ajouter un écouteur d'événement lorsque la valeur du champ date de fin change
+  dateFinInput.addEventListener('change', function () {
+    clearError();
+
+    const dateDebut = new Date(dateDebutInput.value);
+    const dateFin = new Date(dateFinInput.value);
+
+    if (dateDebut > dateFin) {
+      showError("La date de début ne peut pas être postérieure à la date de fin.");
+    }
+  });
 
 
-
-
-})
-
-
-// ENVOIE DU FORMULAIRE VERS L'API
-
-
-document.addEventListener("DOMContentLoaded", (event) => {
+  // ENVOIE DU FORMULAIRE VERS L'API
 
   document.getElementById('creatEvent').addEventListener('click', submitForm);
 
+  document.getElementById('participateEvent').addEventListener('click', participateEvent);
+
 });
+
+

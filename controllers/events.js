@@ -136,7 +136,6 @@ export const isEventFull = async (eventId) => {
 // FONCTION POUR PARTICIPER À L'ÉVÉNEMENT
 
       //router.post('/:eventID/participate',events.participate) 
-
       export const participateEvent = async (req, res) => {
         try {
           const userId = req.user.id;
