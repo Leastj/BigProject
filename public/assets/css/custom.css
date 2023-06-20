@@ -149,3 +149,13 @@ text-align: center;
   }
   
 
+
+/* ============== COMPORTEMENT BOUTON ================ */
+
+
+  .participation-complete {
+    pointer-events: none; /* Désactive les interactions avec le bouton */
+    background-color: gray; /* Change la couleur de fond du bouton */
+    color: white; /* Change la couleur du texte du bouton */
+    cursor: default; /* Change le curseur de la souris au survol du bouton */
+  }

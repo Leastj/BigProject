@@ -1,42 +1,65 @@
+async function submit() {
+  try {
+    const pseudo = document.getElementById('pseudo').value;
+    const mail = document.getElementById('mail').value;
+    const password = document.getElementById('password').value;
 
-    
-    async function submit() {
-      try {
-        const response = await API.call('/auth/signup', 'POST', {
-          pseudo: document.getElementById('pseudo').value,
-          mail: document.getElementById('mail').value,
-          password: document.getElementById('password').value,
-        });
+    console.log('Données du formulaire :', pseudo, mail, password);
 
-        const myHeaders = new Headers({
-          'Content-Type': 'application/json',
-          'Authorization': 'your-token'
-        });
-        // console.log(response.id, response.token)
+    // Supprimer les messages d'erreur existants
+    const errorMessageContainer = document.getElementById('ErrorMessage');
+    errorMessageContainer.innerHTML = '';
 
-        if (response.id != null && response.token != null) {
-          window.location.replace("http://localhost:3000/profil.html")
-        }
+    const response = await API.call('/auth/signup', 'POST', {
+      pseudo,
+      mail,
+      password
+    });
 
+    console.log('Réponse de l\'API :', response);
 
-      } catch (error) {
-        console.error(error);
+    if (response && response.id && response.token) {
+      const confirmed = confirm('Utilisateur créé avec succès. Voulez-vous vous connecter ?');
 
-        const errorMessageContainer = document.getElementById('ErrorMessage');
-        errorMessageContainer.innerHTML = '';
-
-        const errorMessage = document.createElement('p');
-        errorMessage.textContent = "Oups, votre pseudo ou mail existe déjà.";
-        errorMessage.style.color = 'red';
-
-        errorMessageContainer.appendChild(errorMessage);
+      if (confirmed) {
+        // Redirection vers la page de connexion
+        window.location.replace("/signin.html");
+      } else {
+        // Autres actions à effectuer si l'utilisateur choisit de ne pas se connecter
+        // Par exemple, vider les champs du formulaire
+        document.getElementById('pseudo').value = '';
+        document.getElementById('mail').value = '';
+        document.getElementById('password').value = '';
       }
+    } else {
+      console.log('La réponse de l\'API est incorrecte.');
     }
 
-    
-  
+  } catch (error) {
+    console.error('Erreur lors de la création de l\'utilisateur :', error);
 
-  document.addEventListener("DOMContentLoaded", (event) => {
-    document.getElementById('creatUsers').addEventListener('click', submit)
-  })
+    const errorMessageContainer = document.getElementById('ErrorMessage');
+    errorMessageContainer.innerHTML = '';
 
+    const errorMessage = document.createElement('p');
+    errorMessage.textContent = "Oups, votre pseudo ou mail existe déjà.";
+    errorMessage.style.color = 'red';
+
+    errorMessageContainer.appendChild(errorMessage);
+  }
+}
+
+function showAlertMessage(message) {
+  const alertContainer = document.getElementById('alertContainer');
+  alertContainer.innerHTML = '';
+
+  const alertMessage = document.createElement('p');
+  alertMessage.textContent = message;
+  alertMessage.classList.add('alert-message');
+
+  alertContainer.appendChild(alertMessage);
+}
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  document.getElementById('creatUsers').addEventListener('click', submit);
+});

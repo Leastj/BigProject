@@ -1,4 +1,4 @@
-import User from '../models/users.js';
+import User from '../models/user.js';
 import { generateToken } from '../utils/utils.js';
 import { checkPassword } from '../utils/utils.js';
 

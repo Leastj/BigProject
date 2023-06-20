@@ -8,7 +8,7 @@ import matchesRoutes from './routes/matches.js';
 import roundsRoutes from './routes/rounds.js';
 import authRoutes from './routes/auth.js';
 
-import User from './models/users.js';
+import User from './models/user.js';
 
 
 
@@ -68,3 +68,4 @@ app.use("/api/events", eventsRoutes)
 app.use("/api/matches", matchesRoutes)
 app.use("/api/round", roundsRoutes)
 app.use("/api/auth", authRoutes)
+

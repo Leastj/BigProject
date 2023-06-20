@@ -1,13 +1,12 @@
 class ApiService {
-
   static API_BASE_URL = 'http://localhost:3000/api';
 
   constructor() {
     if (ApiService.instance instanceof ApiService) {
-      return ApiService.instance
+      return ApiService.instance;
     }
-    Object.freeze(this)
-    ApiService.instance = this
+    Object.freeze(this);
+    ApiService.instance = this;
   }
 
   async call(endpoint, method = 'GET', data = null) {
@@ -18,7 +17,7 @@ class ApiService {
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: "include"
+      credentials: 'include',
     };
 
     if (data) {
@@ -27,16 +26,16 @@ class ApiService {
 
     try {
       const response = await fetch(url, options);
+      const responseData = await response.json();
+
       if (!response.ok) {
-        window.location.replace("/")
-        return
-        //throw new Error(responseData.message || 'Une erreur est survenue lors de l\'appel de l\'API.');
+        throw new Error(responseData.message || 'Une erreur est survenue lors de l\'appel de l\'API.');
       }
 
-      const responseData = await response.json();
       return responseData;
     } catch (err) {
-      window.location.replace("/")
+      console.error(err);
+      throw err;
     }
   }
 
@@ -46,27 +45,28 @@ class ApiService {
     const options = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     };
 
     if (data) {
       options.body = JSON.stringify(data);
     }
 
-    const response = await fetch(url, options);
+    try {
+      const response = await fetch(url, options);
 
-    console.debug(response)
+      if (!response.ok) {
+        throw new Error('Une erreur est survenue lors de l\'appel de l\'API.');
+      }
 
-    if (!response.ok) {
-      throw new Error('Une erreur est survenue lors de l\'appel de l\'API.');
+      const responseData = await response.json();
+      return responseData;
+    } catch (error) {
+      console.error(error);
+      throw error;
     }
-
-    return response.ok
   }
-
 }
-
-
 
 const API = new ApiService();

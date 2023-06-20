@@ -16,7 +16,16 @@
     <!-- ====== MY  ---------------->
 
   <script src="/assets/js/services/api.js"></script>
-  <script src="/assets/js/profil.js"></script>
+  <script type='module'>
+    import {EventUtils} from '/assets/js/profil.js';
+
+/* document.addEventListener('DOMContentLoaded', () => {
+
+    EventUtils.generateEventCards()
+  
+}); */
+  </script>
+
 
 </head>
 
@@ -24,40 +33,38 @@
 
 
 
-  <!-- ====== Navbar Section Start -->
-  <div class="ud-header absolute top-0 left-0 z-40 flex w-full items-center bg-transparent">
-    <div class="container">
-      <div class="relative -mx-4 flex items-center justify-between">
-        <div class="w-60 max-w-full px-4">
-          <a href="profil.html" class="navbar-logo block w-full py-5">
-            <img src="assets/images/logo/logo-white.svg" alt="logo" class="header-logo w-full" />
-          </a>
-        </div>
-        <div class="flex w-full items-center justify-between px-4">
-          <div>
-            <button id="navbarToggler"
-              class="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden">
-              <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
-              <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
-              <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
-            </button>
-            <nav id="navbarCollapse"
-              class="absolute right-4 top-full hidden w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:py-0 lg:px-4 lg:shadow-none xl:px-6">
-              <ul class="blcok lg:flex">
-                <li class="group relative">
-                  <a href="#" id="openpopup"
-                    class="ud-menu-scroll mx-8 flex items-center py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">
-                    <ion-icon name="game-controller" class="icon-large"></ion-icon>
-                    Créer un tournois
-                  </a>
-
-                </li>
-          </div>
-          </li>
-          </ul>
+<!-- ====== Navbar Section Start -->
+<div class="ud-header absolute top-0 left-0 z-40 flex w-full items-center bg-transparent">
+  <div class="container">
+    <div class="relative -mx-4 flex items-center justify-between">
+      <div class="w-60 max-w-full px-4">
+        <a href="profil.html" class="navbar-logo block w-full py-5">
+          <img src="assets/images/logo/logo-white.svg" alt="logo" class="header-logo w-full" />
+        </a>
+      </div>
+      <div class="flex w-full items-center justify-between px-4">
+        <div>
+          <button id="navbarToggler"
+            class="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden">
+            <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
+            <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
+            <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
+          </button>
+          <nav id="navbarCollapse"
+            class="absolute right-4 top-full hidden w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:py-0 lg:px-4 lg:shadow-none xl:px-6">
+            <ul class="blcok lg:flex">
+              <li class="group relative">
+                <a href="#" id="openpopup"
+                  class="ud-menu-scroll mx-8 flex items-center py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">
+                  <ion-icon name="game-controller" class="icon-large"></ion-icon>
+                  Créer un tournois
+                </a>
+              </li>
+            </ul>
           </nav>
         </div>
         <div style="display: inline-flex; justify-content: center; align-items: center;">
+          <div id="userLabel" class="text-white mx-4"></div>
           <a href="index.html"
             class="rounded-lg bg-white py-4 px-4 text-base font-medium text-dark duration-300 hover:bg-opacity-100 hover:text-dark hover:bg-931433"
             style="min-width: 120px; height: 40px; background: #ECECEC; border-radius: 32px; flex: none; order: 3; flex-grow: 0; display: flex; align-items: center; justify-content: center;">
@@ -67,7 +74,8 @@
       </div>
     </div>
   </div>
-  <!-- ====== Navbar Section End -->
+</div>
+<!-- ====== Navbar Section End -->
 
   <div class="container">
     <div class="row">
@@ -116,6 +124,8 @@
                 class="centered-button bg-primary text-white font-semibold py-3 px-8 rounded-md shadow-md hover:bg-primary-dark transition duration-300">
                 Créer mon tournois
               </button>
+
+              <p id="ErrorMessage"></p>
 
               <div id="popupContainer"></div>
 

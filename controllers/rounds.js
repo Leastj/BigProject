@@ -1,4 +1,4 @@
-import Round from '../models/rounds.js';
+import Round from '../models/round.js';
 
 // GET /rounds : Récupère une liste de tous les tours
 
