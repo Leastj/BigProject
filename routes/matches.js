@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/', matches.getMatches);
 router.get('/:matchID', matches.getMatch);
 //router.post("/", matches.createMatch);
-router.put("/:matchID", matches.enterScore);
+router.put("/:matchID/enterScore", matches.enterScore);
 
 //router.delete("/:matchID", matches.deleteMatch);
 //router.get("/ongoing", matches.getOngoingMatches);

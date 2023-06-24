@@ -74,7 +74,15 @@ async function submitForm(event) {
 
 const detailEventUtils = {
 
-
+    async getUserPseudo(userId) {
+        try {
+            const userDetails = await API.call(`/users/${userId}`, 'GET');
+            return userDetails ? userDetails.pseudo : null; // Retourne le pseudo de l'utilisateur si les détails de l'utilisateur sont récupérés avec succès, sinon null
+        } catch (error) {
+            console.error('Erreur lors de la récupération du pseudo de l\'utilisateur:', error);
+            return null;
+        }
+    },
 
 
     // Fonction pour récupérer l'ID utilisateur actuel
@@ -88,15 +96,8 @@ const detailEventUtils = {
         }
     },
 
-    async getUserDetails(userId) {
-        try {
-          const userDetails = await API.call(`/users/${userId}`, 'GET');
-          return userDetails;
-        } catch (error) {
-          console.error('Erreur lors de la récupération des détails de l\'utilisateur:', error);
-          return null;
-        }
-      },
+
+    
 
     async displayEventDetails(eventId) {
         const eventDetailsContainer = document.getElementById('eventDetails');
@@ -132,40 +133,47 @@ const detailEventUtils = {
 
     async generateTournamentTable(eventId) {
         try {
-            const eventDetails = await API.call(`/events/${eventId}`, 'GET');
-            const matchIds = eventDetails.matches;
-            const tournamentTable = document.getElementById('tournamentTable');
-            const tableBody = tournamentTable.querySelector('tbody');
-            tableBody.innerHTML = '';
-    
-            for (let matchIndex = 0; matchIndex < matchIds.length; matchIndex++) {
-                const matchId = matchIds[matchIndex];
-                const matchDetails = await API.call(`/matches/${matchId}`, 'GET');
-                console.log('Match Details:', matchDetails);
-                console.log('Player 1:', matchDetails.player1);
-                console.log('Player 2:', matchDetails.player2);
-                console.log('Score player 1:', matchDetails.u1score1);
-                console.log('Score player 2:', matchDetails.u2score1);
-    
-                const matchRow = document.createElement('tr');
-                matchRow.innerHTML = `
-                <td>Match ${matchIndex + 1}</td>
-                <td>${matchDetails.score ? matchDetails.u1score1 : 'N/A'}</td> 
-                <td>${matchDetails.score ? matchDetails.u2score1 : 'N/A'}</td> 
-                <td>${matchDetails.score ? matchDetails.score : 'N/A'}</td>
-                <td id="scoreButtonCell${matchIndex}"></td>
-                `;
-                tableBody.appendChild(matchRow);
-    
-                const scoreButton = document.createElement('button');
-                scoreButton.innerText = 'Entrez mon score';
-                scoreButton.addEventListener('click', () => this.handleEnterScore(matchId));
-                document.getElementById(`scoreButtonCell${matchIndex}`).appendChild(scoreButton);
+          const eventDetails = await API.call(`/events/${eventId}`, 'GET');
+          const matchIds = eventDetails.matches;
+          const tournamentTable = document.getElementById('tournamentTable');
+          const tableBody = tournamentTable.querySelector('tbody');
+          tableBody.innerHTML = '';
+      
+          for (let matchIndex = 0; matchIndex < matchIds.length; matchIndex++) {
+            const matchId = matchIds[matchIndex];
+            const matchDetails = await API.call(`/matches/${matchId}`, 'GET');
+            console.log('Match Details:', matchDetails);
+      
+            const player1Id = matchDetails.player1;
+            const player2Id = matchDetails.player2;
+      
+            const player1Pseudo = await detailEventUtils.getUserPseudo(player1Id);
+            const player2Pseudo = await detailEventUtils.getUserPseudo(player2Id);
+      
+            const matchRow = document.createElement('tr');
+            matchRow.innerHTML = `
+              <td>Match ${matchIndex + 1}</td>
+              <td>${matchDetails.score ? matchDetails.u1score1 : 'N/A'}</td> 
+              <td>${matchDetails.score ? matchDetails.u2score1 : 'N/A'}</td> 
+              <td>${matchDetails.score ? matchDetails.score : 'N/A'}</td>
+              <td id="scoreButtonCell${matchIndex}"></td>
+            `;
+            tableBody.appendChild(matchRow);
+      
+            // Afficher le bouton "Entrez mon score" uniquement pour le match de l'utilisateur connecté
+            const currentUserID = await detailEventUtils.getCurrentUserID();
+            if (currentUserID === player1Id || currentUserID === player2Id) {
+              const scoreButton = document.createElement('button');
+              scoreButton.innerText = 'Entrez mon score';
+              scoreButton.addEventListener('click', () => this.handleEnterScore(matchId));
+              document.getElementById(`scoreButtonCell${matchIndex}`).appendChild(scoreButton);
             }
+          }
         } catch (error) {
-            console.error('Erreur lors de la récupération des matches:', error);
+          console.error('Erreur lors de la récupération des matches :', error);
         }
-    },
+      },
+      
 
 
 

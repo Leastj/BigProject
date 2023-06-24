@@ -64,24 +64,30 @@ export const getUser = async (req, res) => {
     }
   };
 
-  export const getUserPseudos= async (userIds) => {
-    const userPseudos = [];
-  
-    for (const userId of userIds) {
-      try {
-        const user = await API.call(`/users/${userId}`, 'GET');
-        console.log('User Details:', user);
-  
-        if (user && user.pseudo) {
-          userPseudos.push(user.pseudo);
-        }
-      } catch (error) {
-        console.error('Erreur lors de la récupération de l\'utilisateur:', error);
+ 
+
+  export const getUserById = async (req, res) => {
+    try {
+      const userID = req.params.userId;  // get user id from the route params
+      const user = await User.findById(userID);
+      if (!user) {
+        return res.status(404).send({ message: 'User not found' });
       }
-    }
   
-    return userPseudos;
-  }
+      res.send(user);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  };
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

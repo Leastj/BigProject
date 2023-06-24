@@ -1,5 +1,5 @@
 import Match from '../models/match.js';
-
+import Event from '../models/event.js';
 
 
 export const getMatches = async (req, res) => {
@@ -139,23 +139,23 @@ export const enterScore = async (req, res) => {
   const userID = req.user._id;
 
   try {
-    
-    if (!event) {
-      return res.status(404).json({ message: 'Event introuvable.' });
-    }
-    
+
     const match = await Match.findOne({ _id: req.params.matchID, $or: [{ player1: userID }, { player2: userID }] });
-    
+
     if (!match) {
       return res.status(404).json({ message: 'Match introuvable pour cet utilisateur.' });
     }
-    
+
+    const event = await Event.findById(match.eventID);
+
+    if (!event) {
+      return res.status(404).json({ message: 'Event introuvable.' });
+    }
+
     // Vérifier que les scores de l'utilisateur et de l'adversaire sont différents
     if (userScore === opponentScore) {
       return res.status(400).json({ message: 'Les scores ne peuvent pas être égaux.' });
     }
-
-    const event = await Event.findById(match.eventID);
 
     // Vérifiez si la date du match est passée
     const now = new Date();
@@ -175,34 +175,69 @@ export const enterScore = async (req, res) => {
       return;
     }
 
-    // Met à jour les scores en fonction de l'ID de l'utilisateur
-    if (match.player1.toString() === userID) {
-      match.u1score1 = userScore;
-      match.u1score2 = opponentScore;
-      console.log(`Player 1 Score: ${userScore}, Opponent Score: ${opponentScore}`);
+// Met à jour les scores en fonction de l'ID de l'utilisateur
+if (match.player1.toString() === userID.toString()) {
+  // L'utilisateur connecté est le joueur 1
+  // Mettez à jour les scores pour le joueur 1
+  if (match.u1score1 === null || match.u1score2 === null) {
+    match.u1score1 = userScore; // Score du joueur 1 vu par lui-même
+    match.u1score2 = opponentScore; // Score de l'adversaire vu par le joueur 1
+  } else {
+    match.u1score1 = userScore; // Remplace le score précédent du joueur 1
+    match.u1score2 = opponentScore; // Remplace le score précédent de l'adversaire pour le joueur 1
+  }
+  console.log(`Player 1 Score: ${userScore}, Opponent Score: ${opponentScore}`);
+} else if (match.player2.toString() === userID.toString()) {
+  // L'utilisateur connecté est le joueur 2
+  // Mettez à jour les scores pour le joueur 2
+  if (match.u2score1 === null || match.u2score2 === null) {
+    match.u2score1 = userScore; // Score du joueur 2 vu par lui-même
+    match.u2score2 = opponentScore; // Score de l'adversaire vu par le joueur 2
+  } else {
+    match.u2score1 = userScore; // Remplace le score précédent du joueur 2
+    match.u2score2 = opponentScore; // Remplace le score précédent de l'adversaire pour le joueur 2
+  }
+  console.log(`Player 2 Score: ${userScore}, Opponent Score: ${opponentScore}`);
+} else {
+  return res.status(400).json({ message: 'Cet utilisateur ne peut pas entrer de score pour ce match.' });
+}
+
+await match.save();
+
+// ...
+
+if (!match.isDone) {
+  if (
+    match.u1score1 === null ||
+    match.u1score2 === null ||
+    match.u2score1 === null ||
+    match.u2score2 === null
+  ) {
+    return res.json({ message: `Scores enregistrés, en attente de ceux de l'adversaire.` });
+  } else {
+    // Les scores sont complets
+    if (match.u1score1 === match.u2score2 && match.u1score2 === match.u2score1) {
+      // Les scores correspondent
+      const winnerId = match.u1score1 > match.u1score2 ? match.player1 : match.player2;
+      console.log(`Winner ID: ${winnerId}`);
+    
+      // Faites ce que vous souhaitez lorsque les scores correspondent et que vous avez l'ID du gagnant
+      
+      // Ensuite, vous pouvez envoyer la réponse JSON finale
+      return res.status(200).json({ message: 'Scores enregistrés avec succès. Le match est terminé.', winner: winnerId });
     } else {
-      match.u2score1 = userScore;
-      match.u2score2 = opponentScore;
-      console.log(`Player 2 Score: ${userScore}, Opponent Score: ${opponentScore}`);
+      return res.json({ message: `Les scores ne correspondent pas avec ceux saisis par votre adversaire. Mettez-vous d'accord.` });
     }
+  }
+}
 
-    await match.save();
+// Gestion nombre impairs, on oublie pour le moment
 
-    if (!match.isDone) {
-      if (match.u1score1 == null || match.u2score1 == null) {
-        res.json({ message: `Score enregistrés, en attente de ceux de l'adversaire.` });
-      } else {
-        res.json({ message: `Les scores ne corespondent pas avec ceux saisis par votre adversaire. Mettez vous d'accord.` });
-      }
-      return
-    }
+// Je récupère le round suivant
+// Chercher le premier match qui n'est pas complet
+const nextMatch = await Match.find({ eventID: event._id, round: match.round + 1, player2: null });
+const winnerId = match.winner;
 
-    // Gestion nombre impairs, on oublie pour le moment
-
-    // Je récupére le round suivant
-    // Chercher le premier match qui n'est pas complet
-    const nextMatch = await Match.find({ eventID: event._id, round: match.round + 1, player2: null });
-    const winnerId = match.winner;
 
     if (!nextMatch) {
       // Aucun match disponible, créer un nouveau match

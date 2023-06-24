@@ -168,7 +168,6 @@ export const getEventRoundsAndMatches = async (req, res) => {
 
 
 // FONCTION POUR PARTICIPER À L'ÉVÉNEMENT
-
 export const participateEvent = async (req, res) => {
   try {
     const userId = req.user._id;
@@ -234,17 +233,16 @@ export const participateEvent = async (req, res) => {
       console.log(`User ${userId} joined match ${availableMatch._id} as PLAYER2`);
     }
 
+    // Récupérer les ID des utilisateurs participants
+    const participantIds = [...participantsSet, userId];
 
-   //Récupérer les ID des utilisateurs participants à partir du Set
-    const participantIds = Array.from(updatedParticipantsSet);
-
-     //Ajoutez les identifiants de participants à votre modèle d'événement
-     event.participantIds = participantIds;
+    // Mettre à jour les identifiants de participants dans le modèle d'événement
+    event.participantIds = participantIds;
     await event.save();
 
     console.log('Participant IDs:', participantIds);
 
-    res.json({ message: 'Participation réussie.', participantIds: [...participantsSet, userId] });
+    res.json({ message: 'Participation réussie.', participantIds });
     return;
   } catch (error) {
     console.error(error);
