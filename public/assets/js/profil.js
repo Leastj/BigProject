@@ -31,6 +31,8 @@ function clearError() {
   errorDateMessage.textContent = '';
 }
 
+
+
 async function submitForm(event) {
   event.preventDefault(); // Empêche le rechargement de la page par défaut
 
@@ -49,7 +51,7 @@ async function submitForm(event) {
 
     window.location.replace("http://localhost:3000/profil.html");
   } catch (error) {
-    
+
     // Gérer les erreurs et afficher un message d'erreur approprié
     console.error(error);
 
@@ -67,15 +69,31 @@ async function submitForm(event) {
   }
 }
 
+
+
 const EventUtils = {
-  async generateEventCards() {
+
+  // Fonction pour récupérer l'ID utilisateur actuel
+  async getCurrentUserID() {
+    try {
+      const currentUser = await API.call('/users/current', 'GET');
+      return currentUser ? currentUser._id : null;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+
+// AVEC BOUTON ENTREZ SCORE EN COURS 
+ /*  async generateEventCards() {
     const eventsContainer = document.getElementById('competitionsContainer');
+    const ongoingEventsContainer = document.getElementById('ongoingCompetitionsContainer');
     eventsContainer.innerHTML = '';
+    ongoingEventsContainer.innerHTML = '';
 
     try {
       const events = await API.call('/events', 'GET');
-      const currentUser = await API.call('/users/current', 'GET');
-      const currentUserID = currentUser ? currentUser._id : null;
+      const currentUserID = await this.getCurrentUserID();
 
       if (Array.isArray(events) && events.length > 0 && currentUserID) {
         events.forEach(event => {
@@ -88,37 +106,176 @@ const EventUtils = {
           const formattedStartDate = formatDate(startDate);
           const formattedEndDate = formatDate(endDate);
 
-          // Vérifier si l'utilisateur participe déjà à l'événement
-          const isUserParticipating = Array.isArray(event.registeredUsers) && event.registeredUsers.includes(currentUserID);
+          const participantIds = event.participantIds || [];
+          const isUserParticipating = participantIds.includes(currentUserID);
 
-          // Calculer le nombre de participants inscrits et le nombre maximum de participants
-          const participantsCount = Array.isArray(event.registeredUsers) ? event.registeredUsers.length : 0;
+          const participantsCount = participantIds.length;
           const maxParticipantsCount = typeof event.maxParticipants === 'number' ? event.maxParticipants : 0;
 
-          // Récupérer l'état du bouton depuis le stockage local en utilisant l'ID de l'utilisateur
           const isButtonClicked = localStorage.getItem(`event_${event._id}_${currentUserID}`);
 
-          card.innerHTML = `
-            <h3>${event.title}</h3>
-            <div class="information">
-              <p class="date">Date de début : ${formattedStartDate}</p>
-              <p class="date">Date de fin : ${formattedEndDate}</p>
-              <p class="participantName">Participants:</p>
-              <p class="participants">${participantsCount}  / ${maxParticipantsCount} (participants)</p>
-            </div>
-            <button class="participate-button" 
-                    data-event-id="${event._id}" 
-                    data-max-participants="${maxParticipantsCount}"
-                    ${isUserParticipating ? 'disabled' : ''}
-                    ${isButtonClicked ? 'data-clicked="true"' : ''}>
-              ${isButtonClicked ? 'Attendez le début du match' : 'Participer'}
-            </button>
-          `;
+          const now = new Date().getTime();
+          const eventStartDateUTC = new Date(event.start_date).getTime();
+          const eventEndDateUTC = new Date(event.end_date).getTime();
+          const eventHasStarted = now >= eventStartDateUTC;
+          const eventHasEnded = now >= eventEndDateUTC;
 
-          const participateButton = card.querySelector('.participate-button');
-          participateButton.addEventListener('click', () => this.addParticipant(event._id, currentUserID));
+          if (eventHasStarted) {
+            let buttonText;
+            if (eventHasEnded) {
+              buttonText = 'Événement terminé';
+            } else {
+              buttonText = 'Veuillez entrer votre score';
+            }
 
-          eventsContainer.appendChild(card);
+            card.innerHTML = `
+              <h3>${event.title}</h3>
+              <div class="information">
+                <p class="round">Round 1</p>
+                <p class="score">_/_</p>
+              </div>
+              <button class="score-button"
+                      data-event-id="${event._id}"
+                      data-max-participants="${maxParticipantsCount}">
+                ${buttonText}
+              </button>
+            `;
+
+            const scoreButton = card.querySelector('.score-button');
+            if (!eventHasEnded) {
+                scoreButton.addEventListener('click', () => {
+                  this.handleEnterScore(event._id);
+                });
+            }
+        
+            ongoingEventsContainer.appendChild(card);
+          } else if (!eventHasStarted) {
+            let buttonText = isButtonClicked ? 'Attendez le début du match' : 'Participer';
+            let buttonAction = () => this.addParticipant(event._id, currentUserID);
+
+            card.innerHTML = `
+              <h3>${event.title}</h3>
+              <div class="information">
+                <p class="date">Date de début : ${formattedStartDate}</p>
+                <p class="date">Date de fin : ${formattedEndDate}</p>
+                <p class="participantName">Participants:</p>
+                <p class="participants">${participantsCount} / ${maxParticipantsCount} (participants)</p>
+              </div>
+              <button class="participate-button"
+                      data-event-id="${event._id}"
+                      data-max-participants="${maxParticipantsCount}"
+                      ${isUserParticipating ? 'disabled' : ''}
+                      ${isButtonClicked ? 'data-clicked="true"' : ''}>
+                ${buttonText}
+              </button>
+            `;
+
+            const participateButton = card.querySelector('.participate-button');
+            participateButton.addEventListener('click', buttonAction);
+
+            eventsContainer.appendChild(card);
+
+          }
+        });
+      } else {
+        console.error('Les données des événements sont vides ou non valides, ou l\'ID utilisateur actuel est manquant.');
+      }
+    } catch (error) {
+      console.error(error);
+      // Gérer les erreurs lors de la récupération des événements
+    }
+  }, */
+
+  async generateEventCards() {
+    const eventsContainer = document.getElementById('competitionsContainer');
+    const ongoingEventsContainer = document.getElementById('ongoingCompetitionsContainer');
+    eventsContainer.innerHTML = '';
+    ongoingEventsContainer.innerHTML = '';
+
+    try {
+      const events = await API.call('/events', 'GET');
+      const currentUserID = await this.getCurrentUserID();
+
+      if (Array.isArray(events) && events.length > 0 && currentUserID) {
+        events.forEach(event => {
+          const card = document.createElement('div');
+          card.classList.add('card');
+
+          const startDate = new Date(event.start_date);
+          const endDate = new Date(event.end_date);
+
+          const formattedStartDate = formatDate(startDate);
+          const formattedEndDate = formatDate(endDate);
+
+          const participantIds = event.participantIds || [];
+          const isUserParticipating = participantIds.includes(currentUserID);
+
+          const participantsCount = participantIds.length;
+          const maxParticipantsCount = typeof event.maxParticipants === 'number' ? event.maxParticipants : 0;
+
+          const isButtonClicked = localStorage.getItem(`event_${event._id}_${currentUserID}`);
+
+          const now = new Date().getTime();
+          const eventStartDateUTC = new Date(event.start_date).getTime();
+          const eventEndDateUTC = new Date(event.end_date).getTime();
+          const eventHasStarted = now >= eventStartDateUTC;
+          const eventHasEnded = now >= eventEndDateUTC;
+
+          if (eventHasStarted) {
+            let buttonText;
+            if (eventHasEnded) {
+              buttonText = 'Événement terminé';
+            } else {
+              buttonText = 'Voir détail';
+            }
+
+            card.innerHTML = `
+              <h3>${event.title}</h3>
+              <div class="information">
+                <p class="date">Fin du match : ${formattedEndDate}</p>
+                <p class="status">Compétition en cours</p>
+              </div>
+              <button class="detail-button"
+                      data-event-id="${event._id}"
+                      data-max-participants="${maxParticipantsCount}">
+                ${buttonText}
+              </button>
+            `;
+
+            const detailButton = card.querySelector('.detail-button');
+            if (!eventHasEnded) {
+                detailButton.addEventListener('click', () => {
+                  window.location.href = `/detailEvent.html?eventId=${event._id}`;
+                });
+            }
+        
+            ongoingEventsContainer.appendChild(card);
+          } else if (!eventHasStarted) {
+            let buttonText = isButtonClicked ? 'Attendez le début du match' : 'Participer';
+            let buttonAction = () => this.addParticipant(event._id, currentUserID);
+
+            card.innerHTML = `
+              <h3>${event.title}</h3>
+              <div class="information">
+                <p class="date">Date de début : ${formattedStartDate}</p>
+                <p class="date">Date de fin : ${formattedEndDate}</p>
+                <p class="participantName">Participants:</p>
+                <p class="participants">${participantsCount} / ${maxParticipantsCount} (participants)</p>
+              </div>
+              <button class="participate-button"
+                      data-event-id="${event._id}"
+                      data-max-participants="${maxParticipantsCount}"
+                      ${isUserParticipating ? 'disabled' : ''}
+                      ${isButtonClicked ? 'data-clicked="true"' : ''}>
+                ${buttonText}
+              </button>
+            `;
+
+            const participateButton = card.querySelector('.participate-button');
+            participateButton.addEventListener('click', buttonAction);
+
+            eventsContainer.appendChild(card);
+          }
         });
       } else {
         console.error('Les données des événements sont vides ou non valides, ou l\'ID utilisateur actuel est manquant.');
@@ -128,7 +285,6 @@ const EventUtils = {
       // Gérer les erreurs lors de la récupération des événements
     }
   },
-  
 
   async addParticipant(eventID, userID) {
     try {
@@ -145,7 +301,24 @@ const EventUtils = {
     } catch (error) {
       console.error(error);
     }
+  },
+
+  async handleEnterScore(eventID) {
+    const userScore = prompt('Entrez votre score');
+    const opponentScore = prompt('Entrez le score de votre adversaire');
+
+    try {
+      const response = await API.call(`/events/${eventID}/enterScore`, 'POST', { userScore, opponentScore });
+      console.log(response.message);
+      // Mettez à jour l'interface utilisateur en conséquence (par exemple, afficher un message de succès ou d'erreur)
+    } catch (error) {
+      console.error(error);
+      // Gérer les erreurs (par exemple, afficher un message d'erreur à l'utilisateur)
+    }
   }
+
+
+
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -203,6 +376,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     const userLabel = document.getElementById('userLabel');
     userLabel.textContent = `Bienvenue dans votre espace ${pseudo}`;
   }
+
+
+
+
+
 });
 
 window.EventUtils = EventUtils;

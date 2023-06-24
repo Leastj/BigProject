@@ -147,7 +147,35 @@ text-align: center;
     padding: 5px 10px;
     cursor: pointer;
   }
+
+  .card .detail-button {
+    background-image: url("/assets/images/logo/background.png");
+    background-size: cover;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: auto; /* Fixer le bouton en bas */
+    margin-bottom: 20px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+ 
+  .card .score-button {
+    background-image: url("/assets/images/logo/background.png");
+    background-size: cover;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: auto; /* Fixer le bouton en bas */
+    margin-bottom: 20px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
   
+  .match-table th {
+    padding: 0 60px; /* Ajoute un espace de 20px à gauche et à droite du texte */
+}
 
 
 /* ============== COMPORTEMENT BOUTON ================ */

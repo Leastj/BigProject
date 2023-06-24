@@ -5,7 +5,6 @@ import cookieParser from 'cookie-parser';
 import usersRoutes from './routes/users.js';
 import eventsRoutes from './routes/events.js';
 import matchesRoutes from './routes/matches.js';
-import roundsRoutes from './routes/rounds.js';
 import authRoutes from './routes/auth.js';
 
 import User from './models/user.js';
@@ -63,9 +62,9 @@ app.use("/api", async (req, res, next) => {
   }
 });
 
-app.use("/api/users", usersRoutes)
-app.use("/api/events", eventsRoutes)
-app.use("/api/matches", matchesRoutes)
-app.use("/api/round", roundsRoutes)
-app.use("/api/auth", authRoutes)
+app.use("/api/users", usersRoutes);
+app.use("/api/events", eventsRoutes);
+app.use("/api/matches", matchesRoutes);
+app.use("/api/auth", authRoutes);
+
 

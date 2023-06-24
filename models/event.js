@@ -17,8 +17,12 @@ const eventSchema = new mongoose.Schema({
       type: Date,
       required: true
     },
-   
 
+    participantIds: [{
+      type: mongoose.Schema.Types.ObjectId, ref: 'User' 
+    }],
+
+   
     matches: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Match' }],
   
 

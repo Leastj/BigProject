@@ -63,3 +63,29 @@ export const getUser = async (req, res) => {
       res.status(500).send(error);
     }
   };
+
+  export const getUserPseudos= async (userIds) => {
+    const userPseudos = [];
+  
+    for (const userId of userIds) {
+      try {
+        const user = await API.call(`/users/${userId}`, 'GET');
+        console.log('User Details:', user);
+  
+        if (user && user.pseudo) {
+          userPseudos.push(user.pseudo);
+        }
+      } catch (error) {
+        console.error('Erreur lors de la récupération de l\'utilisateur:', error);
+      }
+    }
+  
+    return userPseudos;
+  }
+  
+  
+  
+  
+  
+  
+  

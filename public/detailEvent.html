@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail de l'évenement | Tourney Genious</title>
+    <link rel="shortcut icon" href="assets/images/logo/favicon.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/tailwind.css" />
+
+
+    <!-- ====== MY CSS ---------------->
+    <link rel="stylesheet" href="assets/css/custom.css" />
+
+    <!-- ====== MY  ---------------->
+
+    <script src="/assets/js/services/api.js"></script>
+    <script type='module'>
+        import { detailEventUtils } from '/assets/js/detailEvent.js';
+
+
+    </script>
+
+
+</head>
+
+<body class="bg-primary">
+
+
+
+    <!-- ====== Navbar Section Start -->
+    <div class="ud-header absolute top-0 left-0 z-40 flex w-full items-center bg-transparent">
+        <div class="container">
+            <div class="relative -mx-4 flex items-center justify-between">
+                <div class="w-60 max-w-full px-4">
+                    <a href="profil.html" class="navbar-logo block w-full py-5">
+                        <img src="assets/images/logo/logo-white.svg" alt="logo" class="header-logo w-full" />
+                    </a>
+                </div>
+                <div class="flex w-full items-center justify-between px-4">
+                    <div>
+                        <button id="navbarToggler"
+                            class="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden">
+                            <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
+                            <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
+                            <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
+                        </button>
+                        <nav id="navbarCollapse"
+                            class="absolute right-4 top-full hidden w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:py-0 lg:px-4 lg:shadow-none xl:px-6">
+                            <ul class="blcok lg:flex">
+                                <li class="group relative">
+                                    <a href="#" id="openpopup"
+                                        class="ud-menu-scroll mx-8 flex items-center py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">
+                                        <ion-icon name="game-controller" class="icon-large"></ion-icon>
+                                        Créer un tournois
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div style="display: inline-flex; justify-content: center; align-items: center;">
+                        <div id="userLabel" class="text-white mx-4"></div>
+                        <a href="index.html"
+                            class="rounded-lg bg-white py-4 px-4 text-base font-medium text-dark duration-300 hover:bg-opacity-100 hover:text-dark hover:bg-931433"
+                            style="min-width: 120px; height: 40px; background: #ECECEC; border-radius: 32px; flex: none; order: 3; flex-grow: 0; display: flex; align-items: center; justify-content: center;">
+                            Se déconnecter
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ====== Navbar Section End -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-content">
+
+
+                    <div id="createEventPopup" class="popup">
+                        <div class="popup-content">
+                            <ion-icon id="closePopupIcon" name="close-circle"
+                                class="close-icon bg-\[\#6A0C23\] icon-large"></ion-icon>
+
+                            <!-- Formulaire de création d'événement -->
+
+                            <div class="mb-6">
+
+                                Nom du tournois
+                                <input type="text" id="titleEvent" name="titleEvent"
+                                    placeholder="Ex: Road Redeption battle"
+                                    class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none transition focus:border-primary focus-visible:shadow-none"
+                                    required />
+                            </div>
+
+                            <div class="mb-6">
+                                Nombre de participants
+                                <input type="text" id="nombreParticipants" name="nombreParticipants"
+                                    placeholder="Entrez un nombre pair"
+                                    class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none transition focus:border-primary focus-visible:shadow-none"
+                                    required />
+                                <span id="error-nombreParticipants" class="error-message"></span>
+                            </div>
+
+                            <div class="mb-6">
+                                Début de l'événement
+                                <input type="date" id="dateDebut" name="dateDebut"
+                                    class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none transition focus:border-primary focus-visible:shadow-none"
+                                    required />
+                            </div>
+                            <div class="mb-6">
+                                Fin de l'événement
+                                <input type="date" id="dateFin" name="dateFin"
+                                    class="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none transition focus:border-primary focus-visible:shadow-none"
+                                    required />
+                                <p id="errorDate" class="error-message"></p>
+                            </div>
+
+                            <button id="creatEvent" type="submit"
+                                class="centered-button bg-primary text-white font-semibold py-3 px-8 rounded-md shadow-md hover:bg-primary-dark transition duration-300">
+                                Créer mon tournois
+                            </button>
+
+                            <p id="ErrorMessage"></p>
+
+                            <div id="popupContainer">
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="flex justify-start items-center mb-4">
+                            <a href="profil.html" class="text-primary flex items-center">
+                                <ion-icon name="arrow-back" class="mr-2"></ion-icon>
+                                Retour vers la liste des événements
+                            </a>
+
+
+
+                        </div>
+
+                        <div id="eventDetails" class="text-center" style="align-items: flex-start;">
+                            <!-- Les détails de l'événement seront ici -->
+                        </div>
+                        <div class="container flex justify-center">
+                            <div id="tournamentTable">
+                                <table class="match-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Match</th>
+                                            <th>Player 1</th>
+                                            <th>Player 2</th>
+                                            
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Les lignes des matchs seront générées dynamiquement ici -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    <!-- ***** LIBRAIRIE ICON ***** -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+
+
+
+</html>
